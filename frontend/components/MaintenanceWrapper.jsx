@@ -58,10 +58,7 @@ export default function MaintenanceWrapper({ children }) {
     checkMaintenance();
   }, []);
 
-  // Super Admin route is always immune to maintenance blocking
-  if (pathname === "/superadmin") {
-    return <>{children}</>;
-  }
+
 
   // Show a blank dark screen while checking (prevents flashing content)
   if (loading) {
@@ -72,8 +69,13 @@ export default function MaintenanceWrapper({ children }) {
     );
   }
 
-  const isTargetingAdmin = pathname.startsWith("/admin");
-  const isTargetingPublic = !isTargetingAdmin;
+  const isTargetingAdmin = pathname.startsWith("/admin") || pathname.startsWith("/login");
+  const isTargetingPublic = 
+    pathname === "/" || 
+    pathname.startsWith("/berita") || 
+    pathname.startsWith("/galeri") || 
+    pathname.startsWith("/kontak") || 
+    pathname.startsWith("/layanan");
 
   if (isTargetingAdmin && maintenanceData?.is_maintenance_admin) {
     return <MaintenanceBanner data={maintenanceData} target="admin" />;
