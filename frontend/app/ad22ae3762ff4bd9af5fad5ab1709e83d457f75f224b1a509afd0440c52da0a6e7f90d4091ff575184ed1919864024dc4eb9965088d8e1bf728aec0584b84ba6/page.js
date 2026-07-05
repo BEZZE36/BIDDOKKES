@@ -30,25 +30,24 @@ export default function AdminLoginPage() {
       return;
     }
 
-    router.push("/ad22ae3762ff4bd9af5fad5ab1709e83d457f75f224b1a509afd0440c52da0a6e7f90d4091ff575184ed1919864024dc4eb9965088d8e1bf728aec0584b84ba6");
+    router.push("/admin");
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "linear-gradient(135deg, var(--color-navy-900) 0%, #1a3a5c 100%)" }}>
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "linear-gradient(135deg, #0B2340 0%, #1a3a5c 100%)" }}>
       <title>Admin Login — Biddokkes Polda Sulteng</title>
       <div className="w-full max-w-sm">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-xl font-bold"
-            style={{ background: "var(--color-gold-500)", color: "var(--color-navy-900)" }}>B</div>
-          <h2 className="text-white text-xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Panel Admin</h2>
-          <p className="text-sm mt-1" style={{ color: "rgba(255,255,255,0.6)" }}>Biddokkes Polda Sulawesi Tengah</p>
+          <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-xl font-bold bg-[#D9A441] text-[#0B2340]">B</div>
+          <h2 className="text-[#ffffff] text-xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Panel Admin</h2>
+          <p className="text-sm mt-1 text-[#ffffff]/60">Biddokkes Polda Sulawesi Tengah</p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleLogin} className="rounded-2xl p-6 shadow-xl" style={{ background: "var(--color-white)" }}>
+        <form onSubmit={handleLogin} className="rounded-2xl p-6 shadow-xl bg-[#ffffff]">
           <div className="mb-4">
-            <label htmlFor="admin-email" className="block text-sm font-semibold mb-1" style={{ color: "var(--color-ink-900)" }}>Email</label>
+            <label htmlFor="admin-email" className="block text-sm font-semibold mb-1 text-[#16202B]">Email</label>
             <input
               id="admin-email"
               type="email"
@@ -56,14 +55,13 @@ export default function AdminLoginPage() {
               autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-lg text-sm"
-              style={{ border: "1px solid var(--color-line)", outline: "none" }}
+              className="w-full px-3 py-2.5 rounded-lg text-sm bg-white text-black border border-[#E4EAEC] focus:outline-none focus:ring-2 focus:ring-[#0E8C82]"
               placeholder="admin@email.com"
             />
           </div>
 
           <div className="mb-5">
-            <label htmlFor="admin-password" className="block text-sm font-semibold mb-1" style={{ color: "var(--color-ink-900)" }}>Password</label>
+            <label htmlFor="admin-password" className="block text-sm font-semibold mb-1 text-[#16202B]">Password</label>
             <input
               id="admin-password"
               type="password"
@@ -71,14 +69,13 @@ export default function AdminLoginPage() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-lg text-sm"
-              style={{ border: "1px solid var(--color-line)", outline: "none" }}
+              className="w-full px-3 py-2.5 rounded-lg text-sm bg-white text-black border border-[#E4EAEC] focus:outline-none focus:ring-2 focus:ring-[#0E8C82]"
               placeholder="••••••••"
             />
           </div>
 
           {error && (
-            <p id="admin-login-error" className="text-sm mb-4 p-3 rounded-lg" style={{ background: "#FEF2F2", color: "#DC2626" }}>
+            <p id="admin-login-error" className="text-sm mb-4 p-3 rounded-lg bg-[#FEF2F2] text-[#DC2626]">
               {error}
             </p>
           )}
@@ -88,13 +85,13 @@ export default function AdminLoginPage() {
             type="submit"
             disabled={loading}
             className="w-full py-2.5 rounded-lg font-semibold text-sm text-white transition-all"
-            style={{ background: loading ? "var(--color-ink-500)" : "var(--color-teal-600)" }}
+            style={{ background: loading ? "#5C6B72" : "#0E8C82" }}
           >
             {loading ? "Memproses..." : "Masuk"}
           </button>
         </form>
 
-        <p className="text-center text-xs mt-6" style={{ color: "rgba(255,255,255,0.4)" }}>
+        <p className="text-center text-xs mt-6 text-[#ffffff]/40">
           Hanya untuk administrator Biddokkes yang terdaftar.
         </p>
       </div>

@@ -212,7 +212,7 @@ export default function SuperAdminPage() {
           <div className="w-16 h-16 bg-red-500/20 text-red-500 rounded-2xl mx-auto flex items-center justify-center text-3xl mb-6">
             🔒
           </div>
-          <h1 className="text-2xl font-bold text-white mb-2 font-mono">
+          <h1 className="text-2xl font-bold text-[#ffffff] mb-2 font-mono">
             Super Admin
           </h1>
           <p className="text-slate-400 text-sm mb-6 font-mono">
@@ -226,7 +226,7 @@ export default function SuperAdminPage() {
               placeholder="PIN Rahasia..."
               value={pinInput}
               onChange={(e) => setPinInput(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 text-center text-xl text-white py-3 rounded-lg focus:outline-none focus:border-teal-500 mb-4 tracking-widest font-mono"
+              className="w-full bg-slate-950 border border-slate-800 text-center text-xl text-[#ffffff] py-3 rounded-lg focus:outline-none focus:border-teal-500 mb-4 tracking-widest font-mono"
               autoFocus
             />
             {errorMsg && (
@@ -234,7 +234,7 @@ export default function SuperAdminPage() {
             )}
             <button
               type="submit"
-              className="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-3 rounded-lg transition-colors font-mono"
+              className="w-full bg-teal-600 hover:bg-teal-500 text-[#ffffff] font-bold py-3 rounded-lg transition-colors font-mono"
             >
               Buka Kunci
             </button>
@@ -264,7 +264,7 @@ export default function SuperAdminPage() {
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
-          className="fixed top-8 right-8 z-100 p-4 bg-red-600 border border-red-500 rounded-xl shadow-[0_0_20px_rgba(220,38,38,0.4)] text-white font-bold flex items-center gap-3 max-w-sm"
+          className="fixed top-8 right-8 z-100 p-4 bg-red-600 border border-red-500 rounded-xl shadow-[0_0_20px_rgba(220,38,38,0.4)] text-[#ffffff] font-bold flex items-center gap-3 max-w-sm"
         >
           <span>⚠️</span>
           <p>{errorMsg}</p>
@@ -279,7 +279,7 @@ export default function SuperAdminPage() {
       >
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-white flex items-center gap-3">
+            <h1 className="text-3xl font-bold text-[#ffffff] flex items-center gap-3">
               <span>🛡️</span> Control Panel Super Admin
             </h1>
             <p className="text-slate-400 mt-2">
@@ -330,7 +330,7 @@ export default function SuperAdminPage() {
                 <button
                   type="button"
                   onClick={handleBukaAksesLangsung}
-                  className="flex-1 bg-teal-600 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded-lg transition-colors border border-teal-400 shadow-[0_0_15px_rgba(13,148,136,0.5)]"
+                  className="flex-1 bg-teal-600 hover:bg-teal-500 text-[#ffffff] font-bold py-2 px-4 rounded-lg transition-colors border border-teal-400 shadow-[0_0_15px_rgba(13,148,136,0.5)]"
                 >
                   🟢 Buka Akses Sekarang
                 </button>
@@ -354,7 +354,7 @@ export default function SuperAdminPage() {
               >
                 <div className="flex items-center justify-between mb-2">
                   <h3
-                    className={`text-lg font-bold ${formData.is_maintenance_public ? "text-teal-400" : "text-white"}`}
+                    className={`text-lg font-bold ${formData.is_maintenance_public ? "text-teal-400" : "text-[#ffffff]"}`}
                   >
                     Blokir Publik (Beranda)
                   </h3>
@@ -391,7 +391,7 @@ export default function SuperAdminPage() {
                           waktu_selesai_public: e.target.value,
                         })
                       }
-                      className="w-full bg-slate-950 border border-slate-700 text-white px-3 py-2 rounded-lg text-sm focus:outline-none focus:border-teal-500 scheme-dark"
+                      className="w-full bg-slate-950 border border-slate-700 text-[#ffffff] px-3 py-2 rounded-lg text-sm focus:outline-none focus:border-teal-500 scheme-dark"
                     />
                   </div>
                 )}
@@ -411,7 +411,7 @@ export default function SuperAdminPage() {
               >
                 <div className="flex items-center justify-between mb-2">
                   <h3
-                    className={`text-lg font-bold ${formData.is_maintenance_admin ? "text-teal-400" : "text-white"}`}
+                    className={`text-lg font-bold ${formData.is_maintenance_admin ? "text-teal-400" : "text-[#ffffff]"}`}
                   >
                     Blokir Akses Admin
                   </h3>
@@ -447,7 +447,7 @@ export default function SuperAdminPage() {
                           waktu_selesai_admin: e.target.value,
                         })
                       }
-                      className="w-full bg-slate-950 border border-slate-700 text-white px-3 py-2 rounded-lg text-sm focus:outline-none focus:border-teal-500 scheme-dark"
+                      className="w-full bg-slate-950 border border-slate-700 text-[#ffffff] px-3 py-2 rounded-lg text-sm focus:outline-none focus:border-teal-500 scheme-dark"
                     />
                   </div>
                 )}
@@ -476,7 +476,7 @@ export default function SuperAdminPage() {
                           judul_maintenance_public: e.target.value,
                         })
                       }
-                      className="w-full bg-slate-950 border border-slate-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:border-teal-500 text-sm"
+                      className="w-full bg-slate-950 border border-slate-800 text-[#ffffff] px-3 py-2 rounded-lg focus:outline-none focus:border-teal-500 text-sm"
                       placeholder="Contoh: SYSTEM LOCKDOWN"
                     />
                   </div>
@@ -493,7 +493,7 @@ export default function SuperAdminPage() {
                           deskripsi_maintenance_public: e.target.value,
                         })
                       }
-                      className="w-full bg-slate-950 border border-slate-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:border-teal-500 text-sm"
+                      className="w-full bg-slate-950 border border-slate-800 text-[#ffffff] px-3 py-2 rounded-lg focus:outline-none focus:border-teal-500 text-sm"
                       placeholder="Jelaskan alasan pemeliharaan untuk publik..."
                     />
                   </div>
@@ -517,7 +517,7 @@ export default function SuperAdminPage() {
                           judul_maintenance_admin: e.target.value,
                         })
                       }
-                      className="w-full bg-slate-950 border border-slate-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:border-teal-500 text-sm"
+                      className="w-full bg-slate-950 border border-slate-800 text-[#ffffff] px-3 py-2 rounded-lg focus:outline-none focus:border-teal-500 text-sm"
                       placeholder="Contoh: RESTRICTED AREA"
                     />
                   </div>
@@ -534,7 +534,7 @@ export default function SuperAdminPage() {
                           deskripsi_maintenance_admin: e.target.value,
                         })
                       }
-                      className="w-full bg-slate-950 border border-slate-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:border-teal-500 text-sm"
+                      className="w-full bg-slate-950 border border-slate-800 text-[#ffffff] px-3 py-2 rounded-lg focus:outline-none focus:border-teal-500 text-sm"
                       placeholder="Instruksi khusus untuk administrator..."
                     />
                   </div>
@@ -546,7 +546,7 @@ export default function SuperAdminPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-teal-600 hover:bg-teal-500 disabled:opacity-50 text-white font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(14,140,130,0.3)] transition-all flex justify-center items-center gap-2 text-lg"
+                className="w-full bg-teal-600 hover:bg-teal-500 disabled:opacity-50 text-[#ffffff] font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(14,140,130,0.3)] transition-all flex justify-center items-center gap-2 text-lg"
               >
                 {loading ? "Menyimpan..." : "🚀 Terapkan Pengaturan ke Server"}
               </button>
