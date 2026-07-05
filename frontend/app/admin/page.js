@@ -23,14 +23,14 @@ export default function AdminDashboard() {
   useEffect(() => {
     async function checkAuth() {
       if (!supabase) {
-        router.push("/admin");
+        router.push("/login");
         return;
       }
       const {
         data: { session },
       } = await supabase.auth.getSession();
       if (!session) {
-        router.push("/admin");
+        router.push("/login");
         return;
       }
       setUser(session.user);
