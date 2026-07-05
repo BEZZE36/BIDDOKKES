@@ -55,7 +55,7 @@ export default function AdminLoginPage() {
               autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-lg text-sm bg-white text-black border border-[#E4EAEC] focus:outline-none focus:ring-2 focus:ring-[#0E8C82]"
+              className="w-full px-3 py-2.5 rounded-lg text-sm bg-[#f8fafc] text-[#0f172a] border border-[#E4EAEC] focus:outline-none focus:ring-2 focus:ring-[#0E8C82]"
               placeholder="admin@email.com"
             />
           </div>
@@ -69,7 +69,7 @@ export default function AdminLoginPage() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-lg text-sm bg-white text-black border border-[#E4EAEC] focus:outline-none focus:ring-2 focus:ring-[#0E8C82]"
+              className="w-full px-3 py-2.5 rounded-lg text-sm bg-[#f8fafc] text-[#0f172a] border border-[#E4EAEC] focus:outline-none focus:ring-2 focus:ring-[#0E8C82]"
               placeholder="••••••••"
             />
           </div>
