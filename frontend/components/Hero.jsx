@@ -123,7 +123,6 @@ export default function Hero() {
       goTo(next);
     }, 5000);
     return () => clearInterval(timerRef.current);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Initial slide

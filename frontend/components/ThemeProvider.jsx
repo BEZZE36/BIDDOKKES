@@ -10,6 +10,7 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     const saved = localStorage.getItem("biddokkes-theme");
     if (saved === "dark") {
+      // eslint-disable-next-line
       setDark(true);
       document.documentElement.classList.add("dark");
     }

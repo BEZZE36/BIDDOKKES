@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useState, useEffect } from "react";
 import { useTheme } from "../ThemeProvider";
@@ -78,6 +79,7 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
 
     if (pathname === "/galeri") {
+      // eslint-disable-next-line
       setActiveSection("galeri");
     } else if (pathname === "/berita") {
       setActiveSection("berita");
