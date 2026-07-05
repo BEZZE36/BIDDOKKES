@@ -39,7 +39,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-xl font-bold bg-[#D9A441] text-[#0B2340]">B</div>
+          <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-xl font-bold bg-gold-500 text-navy-900">B</div>
           <h2 className="text-[#ffffff] text-xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Panel Admin</h2>
           <p className="text-sm mt-1 text-[#ffffff]/60">Biddokkes Polda Sulawesi Tengah</p>
         </div>
@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
         {/* Form */}
         <form onSubmit={handleLogin} className="rounded-2xl p-6 shadow-xl bg-[#ffffff]">
           <div className="mb-4">
-            <label htmlFor="admin-email" className="block text-sm font-semibold mb-1 text-[#16202B]">Email</label>
+            <label htmlFor="admin-email" className="block text-sm font-semibold mb-1 text-ink-900">Email</label>
             <input
               id="admin-email"
               type="email"
@@ -55,13 +55,13 @@ export default function AdminLoginPage() {
               autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-lg text-sm !bg-[#f8fafc] !text-[#0f172a] !border !border-[#E4EAEC] focus:outline-none focus:ring-2 focus:ring-[#0E8C82]"
+              className="w-full px-3 py-2.5 rounded-lg text-sm bg-[#f8fafc]! text-[#0f172a]! border! border-line! focus:outline-none focus:ring-2 focus:ring-teal-600"
               placeholder="admin@email.com"
             />
           </div>
 
           <div className="mb-5">
-            <label htmlFor="admin-password" className="block text-sm font-semibold mb-1 text-[#16202B]">Password</label>
+            <label htmlFor="admin-password" className="block text-sm font-semibold mb-1 text-ink-900">Password</label>
             <input
               id="admin-password"
               type="password"
@@ -69,7 +69,7 @@ export default function AdminLoginPage() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-lg text-sm !bg-[#f8fafc] !text-[#0f172a] !border !border-[#E4EAEC] focus:outline-none focus:ring-2 focus:ring-[#0E8C82]"
+              className="w-full px-3 py-2.5 rounded-lg text-sm bg-[#f8fafc]! text-[#0f172a]! border! border-line! focus:outline-none focus:ring-2 focus:ring-teal-600"
               placeholder="••••••••"
             />
           </div>

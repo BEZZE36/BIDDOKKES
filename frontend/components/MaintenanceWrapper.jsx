@@ -31,18 +31,18 @@ export default function MaintenanceWrapper({ children }) {
 
       // Subscribe to real-time changes
       const channel = supabase
-        .channel('system_settings_changes')
+        .channel("system_settings_changes")
         .on(
-          'postgres_changes',
+          "postgres_changes",
           {
-            event: 'UPDATE',
-            schema: 'public',
-            table: 'pengaturan_sistem',
-            filter: 'id=eq.1'
+            event: "UPDATE",
+            schema: "public",
+            table: "pengaturan_sistem",
+            filter: "id=eq.1",
           },
           (payload) => {
             setMaintenanceData(payload.new);
-          }
+          },
         )
         .subscribe();
 
@@ -58,8 +58,6 @@ export default function MaintenanceWrapper({ children }) {
     checkMaintenance();
   }, []);
 
-
-
   // Show a blank dark screen while checking (prevents flashing content)
   if (loading) {
     return (
@@ -69,12 +67,15 @@ export default function MaintenanceWrapper({ children }) {
     );
   }
 
-  const isTargetingAdmin = pathname.startsWith("/ad22ae3762ff4bd9af5fad5ab1709e83d457f75f224b1a509afd0440c52da0a6e7f90d4091ff575184ed1919864024dc4eb9965088d8e1bf728aec0584b84ba6") || pathname.startsWith("/admin");
-  const isTargetingPublic = 
-    pathname === "/" || 
-    pathname.startsWith("/berita") || 
-    pathname.startsWith("/galeri") || 
-    pathname.startsWith("/kontak") || 
+  const isTargetingAdmin =
+    pathname.startsWith(
+      "/ad22ae3762ff4bd9af5fad5ab1709e83d457f75f224b1a509afd0440c52da0a6e7f90d4091ff575184ed1919864024dc4eb9965088d8e1bf728aec0584b84ba6",
+    ) || pathname.startsWith("/admin");
+  const isTargetingPublic =
+    pathname === "/" ||
+    pathname.startsWith("/berita") ||
+    pathname.startsWith("/galeri") ||
+    pathname.startsWith("/kontak") ||
     pathname.startsWith("/layanan");
 
   if (isTargetingAdmin && maintenanceData?.is_maintenance_admin) {
