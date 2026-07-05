@@ -23,14 +23,14 @@ export default function AdminDashboard() {
   useEffect(() => {
     async function checkAuth() {
       if (!supabase) {
-        router.push("/login");
+        router.push("/portal-masuk-rahasia");
         return;
       }
       const {
         data: { session },
       } = await supabase.auth.getSession();
       if (!session) {
-        router.push("/login");
+        router.push("/portal-masuk-rahasia");
         return;
       }
       setUser(session.user);
@@ -48,7 +48,7 @@ export default function AdminDashboard() {
 
   async function handleLogout() {
     if (supabase) await supabase.auth.signOut();
-    router.push("/login");
+    router.push("/portal-masuk-rahasia");
   }
 
   async function handleAvatarUpload(e) {
