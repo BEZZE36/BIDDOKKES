@@ -1,0 +1,321 @@
+@import "tailwindcss";
+
+/* stylelint-disable at-rule-no-unknown */
+@theme {
+  --color-white: #FFFFFF;
+  --color-paper: #F7FAFA;
+  --color-mist: #EFF6F5;
+  --color-navy-900: #0B2340;
+  --color-navy-700: #14315A;
+  --color-gold-500: #D9A441;
+  --color-gold-600: #B9872C;
+  --color-teal-600: #0E8C82;
+  --color-teal-700: #0B6F67;
+  --color-teal-100: #E1F3F1;
+  --color-gold-100: #FFF7E6;
+  --color-navy-100: #E8EDF4;
+  --color-ink-900: #16202B;
+  --color-ink-500: #5C6B72;
+  --color-line: #E4EAEC;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --animate-fade-up: fade-up 0.5s ease-out forwards;
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
+  --animate-slide-down: slide-down 0.22s ease forwards;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-down {
+    from { max-height: 0; opacity: 0; }
+    to { max-height: 800px; opacity: 1; }
+  }
+}
+
+/* ── Base ──────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink-900);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+/* ── Dark Mode Variables ───────────────────────── */
+html.dark {
+  --color-white: #111827;
+  --color-paper: #0F172A;
+  --color-mist: #1E2D3D;
+  --color-navy-900: #E2EAF4;
+  --color-navy-700: #CBD5E1;
+  --color-ink-900: #F1F5F9;
+  --color-ink-500: #94A3B8;
+  --color-line: rgba(14, 140, 130, 0.35); /* Health Teal tone */
+  --color-teal-100: #0D2E2B;
+  --color-gold-100: #291F09;
+  --color-navy-100: #101726;
+}
+
+html.dark body { background: #111827; color: #F1F5F9; }
+
+/* Smooth transition for all color-related properties */
+html.dark * {
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+}
+
+/* ── Dark Mode: Elemen yang pakai navy-900 sbg background gelap ── */
+/* Footer */
+html.dark #site-footer { background: #020A14 !important; }
+html.dark #footer-disclaimer { background: rgba(217,164,65,0.15) !important; border-color: rgba(217,164,65,0.3) !important; }
+
+/* Hero info card */
+html.dark #hero-info-card { background: #020A14 !important; }
+
+/* Tribrata badge */
+html.dark #tribrata-badge { background: #020A14 !important; }
+
+/* Header dark mode */
+html.dark #site-header { background: #111827 !important; border-color: rgba(217, 164, 65, 0.4) !important; }
+
+/* Service cards dark */
+html.dark .service-card { background: #1A2332 !important; border-color: rgba(14, 140, 130, 0.4) !important; }
+
+/* Accordion dark */
+html.dark .accordion-trigger { color: #F1F5F9 !important; }
+html.dark .accordion-item { border-color: rgba(217, 164, 65, 0.25) !important; }
+/* Dark mode backgrounds for sections */
+html.dark section[style*="--color-white"],
+html.dark section[style*="var(--color-white)"],
+html.dark div[style*="var(--color-white)"],
+html.dark div[style*="--color-white"] { background: #111827 !important; }
+
+html.dark section[style*="--color-paper"],
+html.dark section[style*="var(--color-paper)"] { background: #0F172A !important; }
+
+html.dark section[style*="--color-mist"],
+html.dark section[style*="var(--color-mist)"] { background: #1E2D3D !important; }
+
+/* Gallery & news cards in dark */
+html.dark .rounded-xl div.p-4 { background: #1A2332 !important; }
+html.dark .rounded-xl div.bg-white { background: #1A2332 !important; }
+html.dark .bg-white { background: #1A2332 !important; }
+
+/* Footer dark - fix text colors (footer originally uses color:white on navy bg) */
+html.dark #site-footer { background: #020A14 !important; color: #E2EAF4 !important; }
+html.dark #site-footer * { color: inherit; }
+html.dark #site-footer p, html.dark #site-footer span, html.dark #site-footer a {
+  color: rgba(226,234,244,0.85) !important;
+}
+html.dark #site-footer p[style*="gold"], html.dark #site-footer p[style*="gold-500"] {
+  color: var(--color-gold-500) !important;
+}
+/* Footer nav accent (gold labels) - keep them gold */
+html.dark #site-footer p.text-xs { color: var(--color-gold-500) !important; }
+
+/* Hero card text stays white-ish on very dark bg */
+html.dark #hero-info-card { background: #020A14 !important; color: #E2EAF4 !important; }
+html.dark #hero-info-card * { color: inherit !important; }
+html.dark #hero-info-card span[style*="gold"] { color: var(--color-gold-500) !important; }
+
+/* Tribrata badge */
+html.dark #tribrata-badge { background: #020A14 !important; color: #E2EAF4 !important; }
+html.dark #tribrata-badge * { color: inherit !important; }
+
+/* Input fields dark */
+html.dark input, html.dark textarea, html.dark select {
+  background: #1A2332 !important;
+  color: #F1F5F9 !important;
+  border-color: rgba(43, 116, 226, 0.4) !important;
+}
+
+
+
+/* ─────────────────────────────────────────────────────────────────────
+   Admin Panel Theme System
+   Uses dedicated --adm-* variables so it's completely independent
+   from the public site dark/light toggle.
+   Toggle by adding/removing class "admin-dark" on #admin-panel-root.
+──────────────────────────────────────────────────────────────────── */
+
+/* Default: Admin Light Mode */
+#admin-panel-root {
+  --adm-bg:           #F0F4F8;
+  --adm-surface:      #FFFFFF;
+  --adm-surface2:     #F7FAFC;
+  --adm-header:       #0B2340;
+  --adm-header-bdr:   #D9A441;
+  --adm-text:         #16202B;
+  --adm-text-muted:   #5C6B72;
+  --adm-border:       #E4EAEC;
+  --adm-teal:         #0E8C82;
+  --adm-teal-hover:   #0B6F67;
+  --adm-teal-soft:    #E1F3F1;
+  --adm-gold:         #D9A441;
+  --adm-mist:         #EFF6F5;
+  --adm-input-bg:     #FFFFFF;
+  --adm-shadow:       rgba(0,0,0,0.06);
+}
+
+/* Admin Dark Mode */
+#admin-panel-root.admin-dark {
+  --adm-bg:           #0F172A;
+  --adm-surface:      #1E293B;
+  --adm-surface2:     #162032;
+  --adm-header:       #020A14;
+  --adm-header-bdr:   #D9A441;
+  --adm-text:         #F1F5F9;
+  --adm-text-muted:   #94A3B8;
+  --adm-border:       rgba(255,255,255,0.1);
+  --adm-teal:         #0E8C82;
+  --adm-teal-hover:   #14B0A5;
+  --adm-teal-soft:    #0D2E2B;
+  --adm-gold:         #D9A441;
+  --adm-mist:         #1E2D3D;
+  --adm-input-bg:     #162032;
+  --adm-shadow:       rgba(0,0,0,0.3);
+}
+
+/* Base admin element styles */
+#admin-panel-root {
+  background: var(--adm-bg);
+  color: var(--adm-text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+#admin-panel-root label {
+  color: var(--adm-text-muted);
+}
+
+#admin-panel-root input,
+#admin-panel-root textarea,
+#admin-panel-root select {
+  background: var(--adm-input-bg) !important;
+  color: var(--adm-text) !important;
+  border-color: var(--adm-border) !important;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+#admin-panel-root input::placeholder,
+#admin-panel-root textarea::placeholder {
+  color: var(--adm-text-muted);
+  opacity: 0.7;
+}
+
+#admin-panel-root option {
+  background: var(--adm-surface);
+  color: var(--adm-text);
+}
+
+h1 { font-size: clamp(2.1rem, 4vw, 3.2rem); line-height: 1.15; }
+h2 { font-size: clamp(1.6rem, 3vw, 2rem); line-height: 1.25; }
+h3 { font-size: 1.15rem; line-height: 1.35; }
+
+/* ── Focus Visible ─────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--color-gold-500);
+  outline-offset: 2px;
+}
+
+/* ── Marquee (CSS-only, compositor thread — immune to JS/React) ── */
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+  will-change: transform;
+}
+/* Pause when hovering any chip inside the track */
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Signage Chip ──────────────────────────────── */
+.signage-chip {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 1rem; border-radius: 9999px;
+  font-size: 0.85rem; font-weight: 600;
+  white-space: nowrap; cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  flex-shrink: 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.signage-chip:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.1); }
+.signage-number { font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.7; }
+
+/* ── Service Card ──────────────────────────────── */
+.service-card {
+  background: var(--color-white); border: 1px solid var(--color-line);
+  border-radius: 12px; padding: 1.5rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.service-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+.service-card:hover .service-icon { transform: scale(1.05); }
+.service-icon { transition: transform 0.15s ease; }
+
+/* ── Accordion ─────────────────────────────────── */
+.accordion-item { border-bottom: 1px solid var(--color-line); }
+.accordion-trigger {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 1rem 0; background: none; border: none;
+  font-size: 1rem; font-weight: 600; color: var(--color-ink-900);
+  cursor: pointer; text-align: left;
+}
+.accordion-trigger:hover { color: var(--color-teal-600); }
+.accordion-icon {
+  font-size: 1.25rem; transition: transform 0.22s ease;
+  color: var(--color-teal-600); flex-shrink: 0;
+}
+.accordion-icon.open { transform: rotate(45deg); }
+.accordion-content {
+  overflow: hidden; max-height: 0; opacity: 0;
+  transition: max-height 0.22s ease, opacity 0.22s ease, padding 0.22s ease;
+  padding: 0 0;
+}
+.accordion-content.open {
+  max-height: 800px; opacity: 1; padding-bottom: 1rem;
+}
+
+/* ── Scroll Reveal ─────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Button ────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.5rem; border-radius: 8px;
+  font-weight: 600; font-size: 0.95rem;
+  background: var(--color-teal-600); color: white;
+  border: none; cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-primary:hover { background: var(--color-teal-700); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(14,140,130,.3); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.5rem; border-radius: 8px;
+  font-weight: 600; font-size: 0.95rem;
+  background: transparent; color: var(--color-teal-600);
+  border: 2px solid var(--color-teal-600); cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn-secondary:hover { background: var(--color-teal-600); color: white; }
+
+/* ── Reduced Motion ────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}
