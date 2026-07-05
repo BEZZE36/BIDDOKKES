@@ -23,14 +23,14 @@ export default function AdminDashboard() {
   useEffect(() => {
     async function checkAuth() {
       if (!supabase) {
-        router.push("/portal-masuk-rahasia");
+        router.push("/ad22ae3762ff4bd9af5fad5ab1709e83d457f75f224b1a509afd0440c52da0a6e7f90d4091ff575184ed1919864024dc4eb9965088d8e1bf728aec0584b84ba6");
         return;
       }
       const {
         data: { session },
       } = await supabase.auth.getSession();
       if (!session) {
-        router.push("/portal-masuk-rahasia");
+        router.push("/ad22ae3762ff4bd9af5fad5ab1709e83d457f75f224b1a509afd0440c52da0a6e7f90d4091ff575184ed1919864024dc4eb9965088d8e1bf728aec0584b84ba6");
         return;
       }
       setUser(session.user);
@@ -48,7 +48,7 @@ export default function AdminDashboard() {
 
   async function handleLogout() {
     if (supabase) await supabase.auth.signOut();
-    router.push("/portal-masuk-rahasia");
+    router.push("/ad22ae3762ff4bd9af5fad5ab1709e83d457f75f224b1a509afd0440c52da0a6e7f90d4091ff575184ed1919864024dc4eb9965088d8e1bf728aec0584b84ba6");
   }
 
   async function handleAvatarUpload(e) {
