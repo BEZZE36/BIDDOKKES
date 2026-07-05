@@ -9,6 +9,11 @@ export default function SplashScreen() {
   const pathname = usePathname();
 
   useEffect(() => {
+    if (pathname !== "/") {
+      setShowSplash(false);
+      return;
+    }
+
     // Only show splash screen once per session/hard refresh
     const hasSeenSplash = sessionStorage.getItem("hasSeenSplash");
     
@@ -36,9 +41,10 @@ export default function SplashScreen() {
       clearTimeout(fadeOutTimer);
       clearTimeout(removeTimer);
     };
-  }, []);
+  }, [pathname]);
 
   // If user navigates or has already seen it, don't render anything
+  if (pathname !== "/") return null;
   if (!showSplash) return null;
 
   return (
