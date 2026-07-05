@@ -48,7 +48,7 @@ export default function AdminDashboard() {
 
   async function handleLogout() {
     if (supabase) await supabase.auth.signOut();
-    router.push("/admin");
+    router.push("/login");
   }
 
   async function handleAvatarUpload(e) {
