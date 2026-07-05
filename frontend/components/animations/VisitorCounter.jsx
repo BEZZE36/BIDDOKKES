@@ -1,6 +1,7 @@
 // VisitorCounter — Real-time website visit counter backed by Supabase
 // On mount: increments the visit count via atomic RPC, then displays
 // the total using the ReactBits-style rolling Counter animation.
+// Uses Supabase Realtime to update count live across all connected devices.
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Counter from "./Counter";
@@ -41,6 +42,35 @@ export default function VisitorCounter({ className = "", style = {} }) {
     }
 
     track();
+
+    // ── Supabase Realtime subscription ─────────────────────────────────
+    // Listen for any UPDATE on site_stats row 'global' — this fires
+    // whenever any other visitor increments the counter so all connected
+    // devices see the new value without refreshing the page.
+    const channel = supabase
+      .channel("visitor_count_live")
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "site_stats",
+          filter: "id=eq.global",
+        },
+        (payload) => {
+          const newCount = payload.new?.total_visits;
+          if (typeof newCount === "number") {
+            setCount(newCount);
+            if (!loaded) setLoaded(true);
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!loaded) return null;

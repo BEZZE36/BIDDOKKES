@@ -201,31 +201,76 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="mt-6 rounded-xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+          id="visitor-counter-card"
+          className="mt-6 rounded-2xl overflow-hidden relative"
           style={{
-            background: "linear-gradient(135deg, #0B2340 0%, #14315A 100%)",
-            border: "1px solid rgba(217,164,65,0.3)",
+            background: "linear-gradient(135deg, var(--color-navy-900) 0%, #14315A 60%, #0B2340 100%)",
+            border: "1px solid rgba(217,164,65,0.35)",
+            boxShadow: "0 8px 32px rgba(11,35,64,0.4), inset 0 1px 0 rgba(217,164,65,0.15)",
           }}
         >
-          <div>
-            <p
-              className="text-xs tracking-[0.15em] uppercase font-semibold mb-1"
-              style={{ color: "#D9A441", fontFamily: "var(--font-mono)" }}
-            >
-              🌐 Total Pengunjung Website
-            </p>
-            <p className="text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Data kunjungan real-time — setiap kali halaman dibuka dihitung
-            </p>
+          {/* Decorative background numeral */}
+          <div
+            aria-hidden="true"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-[120px] font-black leading-none select-none pointer-events-none opacity-[0.04]"
+            style={{ fontFamily: "var(--font-mono)", color: "#D9A441" }}
+          >
+            #
           </div>
-          <div className="flex items-center gap-3 shrink-0">
-            <VisitorCounter />
-            <span
-              className="text-sm font-semibold"
-              style={{ color: "rgba(255,255,255,0.55)", fontFamily: "var(--font-mono)" }}
-            >
-              kunjungan
-            </span>
+
+          <div className="relative z-10 p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+            {/* Left: label */}
+            <div className="flex flex-col gap-1">
+              {/* LIVE indicator */}
+              <div className="flex items-center gap-2 mb-1">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span
+                    className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                    style={{ background: "#22c55e" }}
+                  />
+                  <span
+                    className="relative inline-flex rounded-full h-2.5 w-2.5"
+                    style={{ background: "#22c55e" }}
+                  />
+                </span>
+                <span
+                  className="text-[10px] tracking-[0.2em] uppercase font-bold"
+                  style={{ color: "#22c55e", fontFamily: "var(--font-mono)" }}
+                >
+                  LIVE
+                </span>
+              </div>
+
+              <p
+                className="text-sm sm:text-base tracking-[0.1em] uppercase font-bold"
+                style={{ color: "#D9A441", fontFamily: "var(--font-mono)" }}
+              >
+                🌐 Total Pengunjung Website
+              </p>
+              <p className="text-xs sm:text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+                Diperbarui otomatis — tidak perlu refresh halaman
+              </p>
+            </div>
+
+            {/* Right: rolling counter */}
+            <div className="flex items-end gap-3 shrink-0">
+              <VisitorCounter
+                style={{
+                  padding: "6px 16px",
+                  borderRadius: "10px",
+                  background: "rgba(0,0,0,0.3)",
+                  backdropFilter: "blur(8px)",
+                  border: "1px solid rgba(217,164,65,0.2)",
+                  boxShadow: "0 0 20px rgba(217,164,65,0.12), inset 0 1px 0 rgba(255,255,255,0.05)",
+                }}
+              />
+              <span
+                className="text-sm font-semibold pb-1"
+                style={{ color: "rgba(255,255,255,0.45)", fontFamily: "var(--font-mono)" }}
+              >
+                kunjungan
+              </span>
+            </div>
           </div>
         </motion.div>
       </div>
