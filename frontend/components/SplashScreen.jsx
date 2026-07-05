@@ -8,9 +8,8 @@ export default function SplashScreen() {
   const [isFadingOut, setIsFadingOut] = useState(false);
   const pathname = usePathname();
   const videoRef = useRef(null);
-  const fadeTimerRef = useRef(null);
-  const removeTimerRef = useRef(null);
 
+  // ── Timer: dismiss splash after video ends or after max timeout ──────
   useEffect(() => {
     if (pathname !== "/") {
       setShowSplash(false);
@@ -21,7 +20,6 @@ export default function SplashScreen() {
     const hasSeenSplash = sessionStorage.getItem("hasSeenSplash");
 
     if (hasSeenSplash) {
-      // eslint-disable-next-line
       setShowSplash(false);
       return;
     }
@@ -31,54 +29,51 @@ export default function SplashScreen() {
 
     // The generated video is 4 seconds.
     // Start fading out at 4.2 seconds.
-    fadeTimerRef.current = setTimeout(() => {
+    const fadeTimer = setTimeout(() => {
       setIsFadingOut(true);
     }, 4200);
 
     // Completely remove component from DOM at 5 seconds
-    removeTimerRef.current = setTimeout(() => {
+    const removeTimer = setTimeout(() => {
       setShowSplash(false);
     }, 5000);
 
     return () => {
-      clearTimeout(fadeTimerRef.current);
-      clearTimeout(removeTimerRef.current);
+      clearTimeout(fadeTimer);
+      clearTimeout(removeTimer);
     };
   }, [pathname]);
 
-  // Force play the video as soon as it's ready (bypass browser autoplay block)
+  // ── Video play logic — runs once after component mounts ──────────────
+  // Does NOT use a short safety timer. Instead relies on onError (JSX).
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !showSplash) return;
 
+    // Try to play as soon as the browser has enough data
     const tryPlay = () => {
       video.play().catch(() => {
-        // If autoplay blocked, close splash immediately so page isn't stuck
-        setIsFadingOut(true);
-        setTimeout(() => setShowSplash(false), 700);
+        // Autoplay policy blocked — still show black screen with timers,
+        // which is better than no splash at all.
+        // The main timers (4200ms / 5000ms) will still dismiss it.
       });
     };
 
-    // If video is already ready, play immediately
     if (video.readyState >= 2) {
       tryPlay();
     } else {
       video.addEventListener("canplay", tryPlay, { once: true });
     }
 
-    // Safety net: if video hasn't started within 2s, dismiss splash
-    const safetyTimer = setTimeout(() => {
-      if (video.paused) {
-        setIsFadingOut(true);
-        setTimeout(() => setShowSplash(false), 700);
-      }
-    }, 2000);
-
     return () => {
       video.removeEventListener("canplay", tryPlay);
-      clearTimeout(safetyTimer);
     };
   }, [showSplash]);
+
+  const dismiss = () => {
+    setIsFadingOut(true);
+    setTimeout(() => setShowSplash(false), 700);
+  };
 
   // If user navigates or has already seen it, don't render anything
   if (pathname !== "/") return null;
@@ -86,9 +81,10 @@ export default function SplashScreen() {
 
   return (
     <div
-      className={`fixed inset-0 z-9999 flex items-center justify-center bg-black transition-opacity duration-700 ease-in-out ${
+      className={`fixed inset-0 flex items-center justify-center bg-black transition-opacity duration-700 ease-in-out ${
         isFadingOut ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
+      style={{ zIndex: 9999 }}
     >
       <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
         <video
@@ -97,6 +93,8 @@ export default function SplashScreen() {
           muted
           playsInline
           preload="auto"
+          onEnded={dismiss}
+          onError={dismiss}
           className="w-full h-full object-contain"
         >
           <source src="/0705.mp4" type="video/mp4" />
