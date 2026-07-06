@@ -53,8 +53,12 @@ export default function News() {
     <section id="berita" className="py-16 sm:py-24" style={{ background: "var(--color-white)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <ScrollReveal>
-          <p className="text-xs tracking-[0.15em] uppercase font-semibold mb-3" style={{ color: "var(--color-teal-600)", fontFamily: "var(--font-mono)" }}>Informasi Terbaru</p>
-          <h2 className="mb-8" style={{ color: "var(--color-navy-900)" }}>Berita &amp; Pengumuman</h2>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-8">
+            <h2 style={{ color: "var(--color-navy-900)", margin: 0 }}>Berita &amp; Pengumuman</h2>
+            <span className="text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider" style={{ background: "rgba(11, 35, 64, 0.08)", color: "var(--color-navy-900)", fontFamily: "var(--font-mono)" }}>
+              Informasi Terbaru
+            </span>
+          </div>
         </ScrollReveal>
 
         {loading ? (

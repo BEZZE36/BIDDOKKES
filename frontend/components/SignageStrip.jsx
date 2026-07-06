@@ -4,13 +4,13 @@
 "use client";
 
 const SERVICES = [
-  { num: "01", label: "MCU & Surat Sehat",        color: "#FFFFFF", bg: "rgba(14, 140, 130, 0.85)" },
-  { num: "02", label: "Vaksinasi",                 color: "#FFFFFF", bg: "rgba(217, 164, 65, 0.85)" },
-  { num: "03", label: "Laboratorium & Uji Narkoba",color: "#FFFFFF", bg: "rgba(43, 116, 226, 0.85)" },
-  { num: "04", label: "Psikologi",                 color: "#FFFFFF", bg: "rgba(39, 174, 96, 0.85)" },
-  { num: "05", label: "Ambulans & Rujukan",        color: "#FFFFFF", bg: "rgba(217, 56, 56, 0.85)" },
-  { num: "06", label: "Medikolegal (VER)",         color: "#FFFFFF", bg: "rgba(20, 49, 90, 0.85)" },
-  { num: "07", label: "DVI (Identifikasi Bencana)",color: "#FFFFFF", bg: "rgba(230, 126, 34, 0.85)" },
+  { num: "01", label: "MCU & Surat Sehat",         color: "#FFFFFF", bg: "rgba(11, 111, 103, 0.85)" }, // Teal
+  { num: "02", label: "Vaksinasi",                 color: "#0B2340", bg: "rgba(217, 164, 65, 0.9)" }, // Gold
+  { num: "03", label: "Laboratorium & Uji Narkoba",color: "#FFFFFF", bg: "rgba(11, 35, 64, 0.85)" }, // Navy
+  { num: "04", label: "Psikologi",                 color: "#FFFFFF", bg: "rgba(11, 111, 103, 0.85)" }, // Teal
+  { num: "05", label: "Ambulans & Rujukan",        color: "#0B2340", bg: "rgba(217, 164, 65, 0.9)" }, // Gold
+  { num: "06", label: "Medikolegal (VER)",         color: "#FFFFFF", bg: "rgba(11, 35, 64, 0.85)" }, // Navy
+  { num: "07", label: "DVI (Identifikasi Bencana)",color: "#FFFFFF", bg: "rgba(11, 111, 103, 0.85)" }, // Teal
 ];
 
 // Duplicate once — CSS animation goes 0% → -50%, creating seamless loop

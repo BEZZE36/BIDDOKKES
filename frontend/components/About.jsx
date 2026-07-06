@@ -85,7 +85,7 @@ export default function About() {
           <p
             className="text-xs tracking-[0.15em] uppercase font-semibold mb-3"
             style={{
-              color: "var(--color-teal-600)",
+              color: "var(--color-teal-700)",
               fontFamily: "var(--font-mono)",
             }}
           >
@@ -184,7 +184,7 @@ export default function About() {
                 Visi
               </h3>
               <p
-                className="text-base leading-relaxed font-medium"
+                className="text-base leading-relaxed font-medium max-w-3xl"
                 style={{ color: "var(--color-ink-500)" }}
               >
                 {ABOUT_DATA.visi}
@@ -297,19 +297,17 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
           id="visitor-counter-card"
-          className="mt-6 rounded-2xl overflow-hidden relative"
+          className="mt-6 rounded-2xl relative p-px"
           style={{
             background:
               "linear-gradient(135deg, var(--color-navy-900) 0%, #14315A 60%, #0B2340 100%)",
-            border: "1px solid rgba(217,164,65,0.35)",
-            boxShadow:
-              "0 8px 32px rgba(11,35,64,0.4), inset 0 1px 0 rgba(217,164,65,0.15)",
+            border: "1px solid rgba(217,164,65,0.4)",
           }}
         >
           {/* Decorative background numeral */}
           <div
             aria-hidden="true"
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-[120px] font-black leading-none select-none pointer-events-none opacity-[0.04]"
+            className="absolute right-8 top-1/2 -translate-y-1/2 text-[100px] font-black leading-none select-none pointer-events-none opacity-[0.04]"
             style={{ fontFamily: "var(--font-mono)", color: "#D9A441" }}
           >
             #
@@ -340,7 +338,7 @@ export default function About() {
 
               <p
                 className="text-sm sm:text-base tracking-widest uppercase font-bold"
-                style={{ color: "#D9A441", fontFamily: "var(--font-mono)" }}
+                style={{ color: "#E6C57A", fontFamily: "var(--font-mono)" }}
               >
                 🌐 Total Pengunjung Website
               </p>
@@ -356,13 +354,11 @@ export default function About() {
             <div className="flex items-end gap-3 shrink-0">
               <VisitorCounter
                 style={{
-                  padding: "6px 16px",
-                  borderRadius: "10px",
-                  background: "rgba(0,0,0,0.3)",
-                  backdropFilter: "blur(8px)",
-                  border: "1px solid rgba(217,164,65,0.2)",
-                  boxShadow:
-                    "0 0 20px rgba(217,164,65,0.12), inset 0 1px 0 rgba(255,255,255,0.05)",
+                  padding: "0",
+                  borderRadius: "0",
+                  background: "transparent",
+                  border: "none",
+                  boxShadow: "none",
                 }}
               />
               <span

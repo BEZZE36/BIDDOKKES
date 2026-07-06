@@ -26,7 +26,7 @@ export default function Footer() {
   return (
     <footer
       id="site-footer"
-      className="pt-12 pb-6 relative overflow-hidden"
+      className="pt-12 pb-6 relative overflow-clip"
       style={{ background: "var(--color-navy-900)", color: "white" }}
     >
       {/* Animated background orbs */}
@@ -192,12 +192,12 @@ export default function Footer() {
           id="footer-disclaimer"
           className="my-6 rounded-lg p-4 text-sm leading-relaxed"
           style={{
-            background: "rgba(217,164,65,0.12)",
-            border: "1px solid rgba(217,164,65,0.25)",
-            color: "rgba(255,255,255,0.85)",
+            background: "rgba(217,164,65,0.2)",
+            border: "1px solid rgba(217,164,65,0.4)",
+            color: "#FFFFFF",
           }}
         >
-          ⚠️ <strong>Waspada penipuan</strong> mengatasnamakan petugas.
+          ⚠️ <strong style={{ color: "#FDE68A" }}>Waspada penipuan</strong> mengatasnamakan petugas.
           Biddokkes tidak pernah meminta transfer di luar kanal resmi loket.
           Laporkan kejanggalan melalui kontak resmi di halaman ini.
         </motion.div>

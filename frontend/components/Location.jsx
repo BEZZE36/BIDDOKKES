@@ -15,7 +15,7 @@ export default function Location() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <ScrollReveal>
-          <p className="text-xs tracking-[0.15em] uppercase font-semibold mb-3" style={{ color: "var(--color-teal-600)", fontFamily: "var(--font-mono)" }}>Hubungi Kami</p>
+          <div className="w-12 h-1 mb-4 rounded-full" style={{ background: "var(--color-gold-500)" }} />
           <h2 className="mb-4" style={{ color: "var(--color-navy-900)" }}>Lokasi &amp; Kontak</h2>
           <p className="mb-8 max-w-2xl" style={{ color: "var(--color-ink-500)" }}>
             Tim kami siap membantu Anda dengan layanan kesehatan terbaik. Hubungi kami sekarang!
@@ -69,7 +69,7 @@ export default function Location() {
                     <div className="space-y-2 text-sm" style={{ color: "var(--color-ink-500)" }}>
                       <div className="flex justify-between">
                         <span>Senin – Jumat</span>
-                        <span className="font-semibold" style={{ color: "var(--color-teal-600)" }}>08.00 – 15.00 WITA</span>
+                        <span className="font-semibold" style={{ color: "var(--color-navy-900)" }}>08.00 – 15.00 WITA</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Gawat Darurat &amp; Ambulans</span>

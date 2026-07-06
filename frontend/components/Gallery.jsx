@@ -101,7 +101,7 @@ export default function Gallery() {
               <Link
                 href="/galeri"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full text-sm font-semibold transition-all hover:opacity-90 hover:scale-105"
-                style={{ background: "var(--color-teal-600)", color: "white" }}
+                style={{ background: "var(--color-navy-900)", color: "white" }}
               >
                 Lihat Semua Galeri →
               </Link>

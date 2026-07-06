@@ -18,13 +18,12 @@ export default function FAQ() {
   return (
     <section id="faq" className="py-16 sm:py-24" style={{ background: "var(--color-paper)" }}>
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
-        <ScrollReveal>
-          <p className="text-xs tracking-[0.15em] uppercase font-semibold mb-3" style={{ color: "var(--color-teal-600)", fontFamily: "var(--font-mono)" }}>Bantuan</p>
+        <ScrollReveal className="text-center">
           <h2 className="mb-3" style={{ color: "var(--color-navy-900)" }}>FAQ — Pertanyaan yang Sering Diajukan</h2>
           <p className="mb-8" style={{ color: "var(--color-ink-500)" }}>Jawaban untuk pertanyaan umum seputar layanan Biddokkes.</p>
         </ScrollReveal>
 
-        <div className="rounded-xl overflow-hidden" style={{ border: "1px solid var(--color-line)", background: "var(--color-white)" }}>
+        <div className="rounded-xl relative" style={{ border: "1px solid var(--color-line)", background: "var(--color-white)" }}>
           <div className="px-5">
             {FAQS.map((faq, i) => (
               <ScrollReveal key={i} delay={i * 60}>

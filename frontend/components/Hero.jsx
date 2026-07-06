@@ -145,7 +145,7 @@ export default function Hero() {
           timerRef.current = setInterval(() => { goTo((currentRef.current + 1) % slidesRef.current.length); }, 5000);
         }
       }}
-      className="relative w-full overflow-hidden flex items-center justify-center bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold-500)]"
+      className="relative w-full overflow-hidden flex items-center justify-center bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500"
       style={{ height: "100vh", paddingTop: "64px", boxSizing: "border-box" }}
     >
       {/* Slide layers — rendered once from state, controlled via refs after */}

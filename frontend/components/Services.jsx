@@ -12,7 +12,7 @@ const SERVICES = [
 ];
 
 const COLOR_MAP = {
-  teal: { bg: "var(--color-teal-100)", accent: "var(--color-teal-600)", spotlight: "rgba(14,140,130,0.12)" },
+  teal: { bg: "var(--color-teal-100)", accent: "var(--color-teal-700)", spotlight: "rgba(14,140,130,0.12)" },
   gold: { bg: "#FFF7E6", accent: "var(--color-gold-500)", spotlight: "rgba(217,164,65,0.12)" },
   navy: { bg: "#E8EDF4", accent: "var(--color-navy-900)", spotlight: "rgba(10,31,68,0.08)" },
 };
@@ -22,10 +22,7 @@ export default function Services() {
     <section id="layanan" className="py-16 sm:py-24" style={{ background: "var(--color-paper)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <ScrollReveal>
-          <p className="text-xs tracking-[0.15em] uppercase font-semibold mb-3" style={{ color: "var(--color-teal-600)", fontFamily: "var(--font-mono)" }}>
-            Program Utama
-          </p>
-          <h2 className="mb-3" style={{ color: "var(--color-navy-900)" }}>Layanan Biddokkes</h2>
+          <h2 className="mb-3" style={{ color: "var(--color-navy-900)" }}>Program Utama Layanan Biddokkes</h2>
           <p className="mb-10 max-w-2xl" style={{ color: "var(--color-ink-500)" }}>
             7 jenis layanan kesehatan kepolisian yang tersedia untuk personel Polri, keluarga, dan masyarakat umum.
           </p>
@@ -43,7 +40,7 @@ export default function Services() {
                 >
                   <div className="flex items-start gap-3 mb-3">
                     <div
-                      className="service-icon w-11 h-11 rounded-lg flex items-center justify-center text-xl flex-shrink-0"
+                      className="service-icon w-11 h-11 rounded-lg flex items-center justify-center text-xl shrink-0"
                       style={{ background: c.bg }}
                     >
                       {s.icon}

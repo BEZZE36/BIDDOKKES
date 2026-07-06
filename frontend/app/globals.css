@@ -272,7 +272,7 @@ h3 { font-size: 1.15rem; line-height: 1.35; }
 .accordion-trigger:hover { color: var(--color-teal-600); }
 .accordion-icon {
   font-size: 1.25rem; transition: transform 0.22s ease;
-  color: var(--color-teal-600); flex-shrink: 0;
+  color: var(--color-navy-900); flex-shrink: 0;
 }
 .accordion-icon.open { transform: rotate(45deg); }
 .accordion-content {
