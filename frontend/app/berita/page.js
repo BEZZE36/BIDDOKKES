@@ -43,6 +43,24 @@ export default function BeritaPage() {
       setLoading(false);
     }
     fetchAll();
+
+    if (!supabase) return;
+
+    // Real-time subscription for live updates without refresh
+    const channel = supabase
+      .channel("public:berita:news_page")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "berita" },
+        () => {
+          fetchAll(); // re-fetch when there's any change
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   // Prevent body scroll when modal open

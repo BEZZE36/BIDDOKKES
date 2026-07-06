@@ -29,6 +29,24 @@ export default function News() {
       setLoading(false);
     }
     fetchNews();
+
+    if (!supabase) return;
+
+    // Real-time subscription for live updates without refresh
+    const channel = supabase
+      .channel("public:berita:news_widget")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "berita" },
+        () => {
+          fetchNews(); // re-fetch when there's any change
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   return (
@@ -68,7 +86,7 @@ export default function News() {
                   </p>
                   <h3 className="text-base font-bold mb-2" style={{ color: "var(--color-navy-900)" }}>{item.judul}</h3>
                   <p className="text-sm flex-1" style={{ color: "var(--color-ink-500)" }}>
-                    {item.isi.length > 150 ? item.isi.substring(0, 150) + "…" : item.isi}
+                    {item.isi.length > 250 ? item.isi.substring(0, 250) + "..." : item.isi}
                   </p>
                 </SpotlightCard>
               </ScrollReveal>

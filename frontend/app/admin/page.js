@@ -244,7 +244,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* ── Content ─────────────────────────── */}
-        <div className="pb-12 relative">
+        <div className="pb-32 relative">
           <AnimatePresence mode="wait">
             <motion.div
               key={tab}

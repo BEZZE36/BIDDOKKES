@@ -137,14 +137,15 @@ export default function AdminNewsManager() {
       ) : items.length === 0 ? (
         <p className="text-sm" style={{ color: "var(--adm-text-muted)" }}>Belum ada berita.</p>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-4 pb-12">
           {items.map((item) => (
             <div key={item.id} className="rounded-xl p-4 flex flex-col sm:flex-row gap-4"
               style={{ background: "var(--adm-surface)", border: "1px solid var(--adm-border)", boxShadow: "0 2px 8px var(--adm-shadow)" }}>
-              {item.gambar_url && <img src={item.gambar_url} alt="" className="w-full sm:w-28 h-20 object-cover rounded-lg flex-shrink-0" />}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start gap-2 mb-1">
-                  <h4 className="font-bold text-sm truncate flex-1" style={{ color: "var(--adm-text)" }}>{item.judul}</h4>
+              {item.gambar_url && <img src={item.gambar_url} alt="" className="w-full sm:w-28 h-24 object-cover rounded-lg flex-shrink-0" />}
+              <div className="flex-1 min-w-0 flex flex-col justify-between py-1">
+                <div>
+                  <div className="flex items-start gap-2 mb-1">
+                    <h4 className="font-bold text-sm truncate flex-1" style={{ color: "var(--adm-text)" }}>{item.judul}</h4>
                   <span className="text-xs px-2 py-0.5 rounded-full font-semibold flex-shrink-0"
                     style={{
                       background: item.status === "publish" ? "var(--adm-teal-soft)" : "var(--adm-mist)",
@@ -152,8 +153,9 @@ export default function AdminNewsManager() {
                     }}>
                     {item.status}
                   </span>
+                  </div>
+                  <p className="text-xs mb-3 line-clamp-2" style={{ color: "var(--adm-text-muted)" }}>{item.isi}</p>
                 </div>
-                <p className="text-xs mb-2 line-clamp-2" style={{ color: "var(--adm-text-muted)" }}>{item.isi}</p>
                 <div className="flex gap-2 flex-wrap">
                   <button onClick={() => toggleStatus(item)} className="text-xs px-3 py-1 rounded font-semibold transition-colors"
                     style={{ background: "var(--adm-mist)", color: "var(--adm-text-muted)" }}>
