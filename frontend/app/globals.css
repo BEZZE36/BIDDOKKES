@@ -231,8 +231,9 @@ h3 { font-size: 1.15rem; line-height: 1.35; }
   animation: marquee-scroll 28s linear infinite;
   will-change: transform;
 }
-/* Pause when hovering any chip inside the track */
-.marquee-track:hover {
+/* Pause when hovering or touching any chip inside the track */
+.marquee-track:hover,
+.marquee-track:active {
   animation-play-state: paused;
 }
 

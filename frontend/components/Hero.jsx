@@ -131,7 +131,21 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden flex items-center justify-center bg-black"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowLeft") {
+          clearInterval(timerRef.current);
+          const next = (currentRef.current - 1 + slidesRef.current.length) % slidesRef.current.length;
+          goTo(next);
+          timerRef.current = setInterval(() => { goTo((currentRef.current + 1) % slidesRef.current.length); }, 5000);
+        } else if (e.key === "ArrowRight") {
+          clearInterval(timerRef.current);
+          const next = (currentRef.current + 1) % slidesRef.current.length;
+          goTo(next);
+          timerRef.current = setInterval(() => { goTo((currentRef.current + 1) % slidesRef.current.length); }, 5000);
+        }
+      }}
+      className="relative w-full overflow-hidden flex items-center justify-center bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold-500)]"
       style={{ height: "100vh", paddingTop: "64px", boxSizing: "border-box" }}
     >
       {/* Slide layers — rendered once from state, controlled via refs after */}
@@ -196,8 +210,8 @@ export default function Hero() {
 
       {/* Text content — ref-controlled, never causes re-render */}
       <div
-        className="relative max-w-5xl mx-auto px-4 text-center space-y-6"
-        style={{ zIndex: 20, pointerEvents: "none" }}
+        className="relative max-w-5xl mx-auto px-6 py-16 text-center space-y-6 rounded-3xl"
+        style={{ zIndex: 20, pointerEvents: "none", background: "radial-gradient(circle, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 75%)" }}
       >
         <div>
           <h1
@@ -227,11 +241,10 @@ export default function Hero() {
       </div>
 
       {/* Dots — ref-controlled */}
-      <div className="absolute bottom-10 left-0 right-0 z-20 flex justify-center gap-3">
+      <div className="absolute bottom-6 left-0 right-0 z-20 flex justify-center gap-1">
         {slides.map((_, index) => (
           <button
             key={index}
-            ref={(el) => { dotEls.current[index] = el; }}
             onClick={() => {
               clearInterval(timerRef.current);
               goTo(index);
@@ -241,19 +254,22 @@ export default function Hero() {
                 goTo(next);
               }, 5000);
             }}
-            style={{
-              width: 12,
-              height: 12,
-              borderRadius: "50%",
-              border: "none",
-              cursor: "pointer",
-              transition: "background 0.3s, transform 0.3s, box-shadow 0.3s",
-              background: index === 0 ? "#fff" : "rgba(255,255,255,0.5)",
-              transform: index === 0 ? "scale(1.25)" : "scale(1)",
-              boxShadow: index === 0 ? "0 0 8px rgba(255,255,255,0.8)" : "none",
-            }}
+            className="p-3 cursor-pointer bg-transparent border-none"
             aria-label={`Go to slide ${index + 1}`}
-          />
+          >
+            <div
+              ref={(el) => { dotEls.current[index] = el; }}
+              style={{
+                width: 12,
+                height: 12,
+                borderRadius: "50%",
+                transition: "background 0.3s, transform 0.3s, box-shadow 0.3s",
+                background: index === 0 ? "#fff" : "rgba(255,255,255,0.5)",
+                transform: index === 0 ? "scale(1.25)" : "scale(1)",
+                boxShadow: index === 0 ? "0 0 8px rgba(255,255,255,0.8)" : "none",
+              }}
+            />
+          </button>
         ))}
       </div>
     </section>
