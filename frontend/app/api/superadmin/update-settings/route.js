@@ -15,10 +15,12 @@ import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 import { SESSION_COOKIE_NAME, verifySessionToken } from "../../../../lib/superadminSession";
 
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
+function getSupabaseAdmin() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+  );
+}
 
 // Whitelist kolom yang boleh diupdate lewat endpoint ini.
 // Ini penting supaya client tidak bisa iseng kirim field lain
@@ -61,7 +63,7 @@ export async function POST(request) {
     );
   }
 
-  const { error } = await supabaseAdmin
+  const { error } = await getSupabaseAdmin()
     .from("pengaturan_sistem")
     .update(updatePayload)
     .eq("id", 1);
