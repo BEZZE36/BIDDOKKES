@@ -150,7 +150,7 @@ export default function Footer() {
                     href={link.href}
                     whileHover={{ x: 4, opacity: 1 }}
                     className="text-sm no-underline"
-                    style={{ color: "white", opacity: 0.7 }}
+                    style={{ color: "white", opacity: 0.85 }}
                   >
                     {link.label}
                   </motion.a>
@@ -175,7 +175,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 whileHover={{ x: 4, opacity: 1 }}
                 className="block text-sm mb-2 no-underline"
-                style={{ color: "white", opacity: 0.7 }}
+                style={{ color: "white", opacity: 0.85 }}
               >
                 ↗ {link.label}
               </motion.a>
@@ -205,7 +205,7 @@ export default function Footer() {
         {/* Copyright */}
         <p
           id="footer-copyright"
-          className="text-xs text-center opacity-50 pt-2"
+          className="text-xs text-center opacity-70 pt-2"
         >
           © {year} Biddokkes Polda Sulawesi Tengah. All rights reserved.
         </p>

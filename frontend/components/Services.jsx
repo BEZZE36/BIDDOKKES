@@ -51,8 +51,8 @@ export default function Services() {
                   </div>
                   <p className="text-sm mb-4 flex-1" style={{ color: "var(--color-ink-500)" }}>{s.desc}</p>
                   <div className="space-y-1 text-xs" style={{ color: "var(--color-ink-500)" }}>
-                    <p><span className="font-semibold" style={{ color: c.accent }}>Syarat:</span> {s.syarat}</p>
-                    <p><span className="font-semibold" style={{ color: c.accent }}>Estimasi:</span> {s.waktu}</p>
+                    <p><span className="font-semibold" style={{ color: "var(--color-navy-900)" }}>Syarat:</span> {s.syarat}</p>
+                    <p><span className="font-semibold" style={{ color: "var(--color-navy-900)" }}>Estimasi:</span> {s.waktu}</p>
                   </div>
                 </SpotlightCard>
               </ScrollReveal>

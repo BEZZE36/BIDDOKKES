@@ -297,7 +297,7 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
           id="visitor-counter-card"
-          className="mt-6 rounded-2xl relative p-px"
+          className="mt-6 rounded-2xl relative p-px overflow-hidden"
           style={{
             background:
               "linear-gradient(135deg, var(--color-navy-900) 0%, #14315A 60%, #0B2340 100%)",
@@ -344,7 +344,7 @@ export default function About() {
               </p>
               <p
                 className="text-xs sm:text-sm leading-relaxed"
-                style={{ color: "rgba(255,255,255,0.55)" }}
+                style={{ color: "rgba(255,255,255,0.75)" }}
               >
                 Real Time Visitor
               </p>
@@ -364,7 +364,7 @@ export default function About() {
               <span
                 className="text-sm font-semibold pb-1"
                 style={{
-                  color: "rgba(255,255,255,0.45)",
+                  color: "rgba(255,255,255,0.7)",
                   fontFamily: "var(--font-mono)",
                 }}
               >
