@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import ScrollReveal from "../ScrollReveal";
 import { useTheme } from "../ThemeProvider";
 import ShinyText from "../animations/ShinyText";
@@ -21,6 +21,7 @@ const EXTERNAL_LINKS = [
 
 export default function Footer() {
   const { dark } = useTheme();
+  const shouldReduceMotion = useReducedMotion();
   const year = new Date().getFullYear();
 
   return (
@@ -179,10 +180,24 @@ export default function Footer() {
 
         {/* Disclaimer */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20, boxShadow: "0 0 0px rgba(217,164,65,0)" }}
+          whileInView={{ 
+            opacity: 1, 
+            y: 0,
+            boxShadow: shouldReduceMotion 
+              ? "0 0 0px rgba(217,164,65,0)"
+              : [
+                  "0 0 0px rgba(217,164,65,0)", 
+                  "0 0 12px rgba(217,164,65,0.35)", 
+                  "0 0 0px rgba(217,164,65,0)"
+                ]
+          }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ 
+            opacity: { duration: 0.5 },
+            y: { duration: 0.5 },
+            boxShadow: { duration: 2.5, repeat: Infinity, ease: "easeInOut" }
+          }}
           id="footer-disclaimer"
           className="my-6 rounded-lg p-4 text-sm leading-relaxed"
           style={{
@@ -191,7 +206,14 @@ export default function Footer() {
             color: "#FFFFFF",
           }}
         >
-          ⚠️ <strong style={{ color: "#FDE68A" }}>Waspada penipuan</strong> mengatasnamakan petugas.
+          <motion.span
+            display="inline-block"
+            animate={{ opacity: shouldReduceMotion ? 1 : [1, 0.5, 1] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          >
+            ⚠️
+          </motion.span>{" "}
+          <strong style={{ color: "#FDE68A" }}>Waspada penipuan</strong> mengatasnamakan petugas.
           Biddokkes tidak pernah meminta transfer di luar kanal resmi loket.
           Laporkan kejanggalan melalui kontak resmi di halaman ini.
         </motion.div>

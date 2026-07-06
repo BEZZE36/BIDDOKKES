@@ -1,24 +1,24 @@
-import { Share_Tech_Mono, IBM_Plex_Mono } from "next/font/google";
+import { Space_Grotesk, Plus_Jakarta_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../components/ThemeProvider";
 import MaintenanceWrapper from "../components/MaintenanceWrapper";
 import SplashScreen from "../components/SplashScreen";
 
-const cyberFont = Share_Tech_Mono({
+const fontDisplay = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const cyberBody = Share_Tech_Mono({
+const fontBody = Plus_Jakarta_Sans({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
+const fontMono = IBM_Plex_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "600"],
@@ -50,7 +50,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="id" className={`${cyberFont.variable} ${cyberBody.variable} ${plexMono.variable}`}>
+    <html lang="id" className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}>
       <body>
         <ThemeProvider>
           <SplashScreen />
