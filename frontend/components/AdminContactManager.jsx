@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabaseClient";
+import ConfirmModal from "./animations/ConfirmModal";
 
 export default function AdminContactManager() {
   const [messages, setMessages] = useState([]);
@@ -8,6 +9,7 @@ export default function AdminContactManager() {
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [selectedMessage, setSelectedMessage] = useState(null);
+  const [confirmState, setConfirmState] = useState({ open: false, id: null });
 
   useEffect(() => {
     fetchMessages();
@@ -35,10 +37,15 @@ export default function AdminContactManager() {
   }
 
   async function handleDelete(id) {
-    if (!confirm("Yakin ingin menghapus pesan ini permanen?")) return;
+    setConfirmState({ open: true, id });
+  }
+
+  async function doDelete() {
+    const id = confirmState.id;
+    setConfirmState({ open: false, id: null });
+    if (!id) return;
     setSuccessMsg("");
     setErrorMsg("");
-
     const { error } = await supabase.from("pesan_kontak").delete().eq("id", id);
     if (error) {
       setErrorMsg("Gagal menghapus pesan.");
@@ -69,6 +76,12 @@ export default function AdminContactManager() {
       className="rounded-xl shadow-sm border overflow-hidden transition-all duration-300"
       style={{ background: "var(--adm-surface)", borderColor: "var(--adm-border)" }}
     >
+      <ConfirmModal
+        isOpen={confirmState.open}
+        message="Yakin ingin menghapus pesan ini secara permanen?"
+        onConfirm={doDelete}
+        onCancel={() => setConfirmState({ open: false, id: null })}
+      />
       <div className="p-6 border-b flex justify-between items-center" style={{ borderColor: "var(--adm-border)" }}>
         <div>
           <h2 className="text-xl font-bold" style={{ color: "var(--adm-text)" }}>Inbox Pesan Kontak</h2>

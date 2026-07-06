@@ -2,6 +2,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
+import ConfirmModal from "./animations/ConfirmModal";
 
 const DEFAULT_SLIDES = [
   { image_url: "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", judul: "BIDDOKKES POLDA SULTENG", subtitle: "Bidang Kedokteran dan Kesehatan Kepolisian Daerah Sulawesi Tengah", urutan: 0 },
@@ -17,6 +18,7 @@ export default function AdminHeroManager() {
   const [form, setForm] = useState({ judul: "", subtitle: "", file: null, urutan: 0, warna_teks: "#FFFFFF" });
   const [editId, setEditId] = useState(null);
   const [msg, setMsg] = useState({ text: "", ok: true });
+  const [confirmState, setConfirmState] = useState({ open: false, id: null });
 
   async function fetchSlides() {
     if (!supabase) { setLoading(false); return; }
@@ -71,7 +73,13 @@ export default function AdminHeroManager() {
 
   async function handleDelete(id) {
     if (!supabase) return;
-    if (!confirm("Yakin ingin menghapus slide ini?")) return;
+    setConfirmState({ open: true, id });
+  }
+
+  async function doDelete() {
+    const id = confirmState.id;
+    setConfirmState({ open: false, id: null });
+    if (!id) return;
     await supabase.from("hero_slides").delete().eq("id", id);
     fetchSlides();
   }
@@ -96,6 +104,12 @@ export default function AdminHeroManager() {
 
   return (
     <div>
+      <ConfirmModal
+        isOpen={confirmState.open}
+        message="Yakin ingin menghapus slide hero ini? Tindakan ini tidak bisa dibatalkan."
+        onConfirm={doDelete}
+        onCancel={() => setConfirmState({ open: false, id: null })}
+      />
       {/* Seed Banner */}
       {!loading && slides.length === 0 && (
         <div className="rounded-xl p-5 mb-6 flex items-center justify-between gap-4"

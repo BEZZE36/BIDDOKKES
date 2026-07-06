@@ -2,6 +2,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
+import ConfirmModal from "./animations/ConfirmModal";
 
 export default function AdminNewsManager() {
   const [items, setItems] = useState([]);
@@ -10,6 +11,7 @@ export default function AdminNewsManager() {
   const [form, setForm] = useState({ judul: "", isi: "", file: null, status: "publish" });
   const [editId, setEditId] = useState(null);
   const [msg, setMsg] = useState({ text: "", ok: true });
+  const [confirmState, setConfirmState] = useState({ open: false, id: null });
 
   async function fetchItems() {
     if (!supabase) { setLoading(false); return; }
@@ -55,9 +57,15 @@ export default function AdminNewsManager() {
 
   async function handleDelete(id) {
     if (!supabase) return;
-    if (!confirm("Yakin ingin menghapus berita ini?")) return;
+    setConfirmState({ open: true, id });
+  }
+
+  async function doDelete() {
+    const id = confirmState.id;
+    setConfirmState({ open: false, id: null });
+    if (!id) return;
     const { error } = await supabase.from("berita").delete().eq("id", id);
-    if (error) { alert("Gagal menghapus: " + error.message); return; }
+    if (error) { setMsg({ text: "Gagal menghapus: " + error.message, ok: false }); return; }
     fetchItems();
   }
 
@@ -78,6 +86,12 @@ export default function AdminNewsManager() {
 
   return (
     <div>
+      <ConfirmModal
+        isOpen={confirmState.open}
+        message="Yakin ingin menghapus berita ini? Tindakan ini tidak bisa dibatalkan."
+        onConfirm={doDelete}
+        onCancel={() => setConfirmState({ open: false, id: null })}
+      />
       {/* Form */}
       <form onSubmit={handleSubmit} className="rounded-xl p-5 mb-6"
         style={{ background: "var(--adm-surface)", border: "1px solid var(--adm-border)", boxShadow: "0 2px 12px var(--adm-shadow)" }}>
