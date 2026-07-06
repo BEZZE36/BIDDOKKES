@@ -32,11 +32,11 @@ export default function Location() {
               style={{ border: "1px solid var(--color-line)" }}
             >
               <iframe
-                src="https://maps.google.com/maps?q=Biddokkes%20Polda%20Sulteng&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=-0.8900822,119.8685687&z=17&output=embed"
                 width="100%"
                 height="350"
                 style={{ border: 0 }}
-                allowFullScreen=""
+                allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Lokasi Biddokkes Polda Sulteng"

@@ -152,11 +152,11 @@ export default function KontakPage() {
               <p className="font-bold mb-3" style={{ color: "var(--color-navy-900)" }}>📍 Temukan Kami</p>
               <div className="rounded-2xl overflow-hidden shadow-md" style={{ border: "1px solid var(--color-line)" }}>
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.434!2d119.8707!3d-0.8917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwNTMnMzAuMSJTIDExOcKwNTInMTQuNSJF!5e0!3m2!1sid!2sid!4v1"
+                  src="https://maps.google.com/maps?q=-0.8900822,119.8685687&z=17&output=embed"
                   width="100%"
                   height="380"
                   style={{ border: 0, display: "block" }}
-                  allowFullScreen=""
+                  allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Lokasi Biddokkes Polda Sulteng"
