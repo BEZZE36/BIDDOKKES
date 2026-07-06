@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../../lib/supabaseClient";
-
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState("");
@@ -22,7 +22,10 @@ export default function AdminLoginPage() {
       return;
     }
 
-    const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
+    const { error: authError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
     if (authError) {
       setError("Email atau password salah. Silakan coba lagi.");
@@ -34,22 +37,46 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "linear-gradient(135deg, #0B2340 0%, #1a3a5c 100%)" }}>
+    <div
+      className="min-h-screen flex items-center justify-center px-4"
+      style={{
+        background: "linear-gradient(135deg, #0B2340 0%, #1a3a5c 100%)",
+      }}
+    >
       <title>Admin Login — Biddokkes Polda Sulteng</title>
       <div className="w-full max-w-sm">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center overflow-hidden">
-            <img src="https://storage.pusdokkes.polri.go.id/pusdokkes/logo.png" alt="Logo Pusdokkes" className="w-full h-full object-contain" />
+            <img
+              src="https://storage.pusdokkes.polri.go.id/pusdokkes/logo.png"
+              alt="Logo Pusdokkes"
+              className="w-full h-full object-contain"
+            />
           </div>
-          <h2 className="text-[#ffffff] text-xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Panel Admin</h2>
-          <p className="text-sm mt-1 text-[#ffffff]/60">Biddokkes Polda Sulawesi Tengah</p>
+          <h2
+            className="text-[#ffffff] text-xl font-bold"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Panel Admin
+          </h2>
+          <p className="text-sm mt-1 text-[#ffffff]/60">
+            Biddokkes Polda Sulawesi Tengah
+          </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleLogin} className="rounded-2xl p-6 shadow-xl bg-[#ffffff]">
+        <form
+          onSubmit={handleLogin}
+          className="rounded-2xl p-6 shadow-xl bg-[#ffffff]"
+        >
           <div className="mb-4">
-            <label htmlFor="admin-email" className="block text-sm font-semibold mb-1 text-ink-900">Email</label>
+            <label
+              htmlFor="admin-email"
+              className="block text-sm font-semibold mb-1 text-ink-900"
+            >
+              Email
+            </label>
             <input
               id="admin-email"
               type="email"
@@ -63,7 +90,12 @@ export default function AdminLoginPage() {
           </div>
 
           <div className="mb-5">
-            <label htmlFor="admin-password" className="block text-sm font-semibold mb-1 text-ink-900">Password</label>
+            <label
+              htmlFor="admin-password"
+              className="block text-sm font-semibold mb-1 text-ink-900"
+            >
+              Password
+            </label>
             <input
               id="admin-password"
               type="password"
@@ -77,7 +109,10 @@ export default function AdminLoginPage() {
           </div>
 
           {error && (
-            <p id="admin-login-error" className="text-sm mb-4 p-3 rounded-lg bg-[#FEF2F2] text-[#DC2626]">
+            <p
+              id="admin-login-error"
+              className="text-sm mb-4 p-3 rounded-lg bg-[#FEF2F2] text-[#DC2626]"
+            >
               {error}
             </p>
           )}
@@ -89,7 +124,7 @@ export default function AdminLoginPage() {
             className="w-full py-2.5 rounded-lg font-semibold text-sm text-white transition-all"
             style={{ background: loading ? "#5C6B72" : "#0E8C82" }}
           >
-            {loading ? "Memproses..." : "Masuk"}
+            {loading ? "Loading..." : "Login"}
           </button>
         </form>
 

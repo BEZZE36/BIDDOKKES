@@ -216,14 +216,14 @@ export default function SuperAdminPage() {
             Super Admin
           </h1>
           <p className="text-slate-400 text-sm mb-6 font-mono">
-            Masukkan PIN Master untuk mengakses Mode Pemeliharaan Sistem
-            Biddokkes.
+            Enter the Master PIN to access the Biddokkes System Maintenance
+            Mode.
           </p>
 
           <form onSubmit={handleLogin}>
             <input
               type="password"
-              placeholder="PIN Rahasia..."
+              placeholder="SECRET CODE..."
               value={pinInput}
               onChange={(e) => setPinInput(e.target.value)}
               className="w-full bg-slate-950 border border-slate-800 text-center text-xl text-[#ffffff] py-3 rounded-lg focus:outline-none focus:border-teal-500 mb-4 tracking-widest font-mono"
@@ -236,7 +236,7 @@ export default function SuperAdminPage() {
               type="submit"
               className="w-full bg-teal-600 hover:bg-teal-500 text-[#ffffff] font-bold py-3 rounded-lg transition-colors font-mono"
             >
-              Buka Kunci
+              Unlock
             </button>
           </form>
         </motion.div>
