@@ -112,7 +112,7 @@ export default function AdminNewsManager() {
           <div>
             <label className="block text-sm font-semibold mb-1">Gambar Sampul (opsional)</label>
             <input type="file" accept="image/*" onChange={(e) => setForm({ ...form, file: e.target.files[0] })}
-              className="text-sm file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-[#0D2E2B] file:text-[#0E8C82] hover:file:bg-[#0E8C82] hover:file:text-white file:cursor-pointer file:transition-all cursor-pointer"
+              className="text-sm file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-[#0D2E2B] file:text-teal-600 hover:file:bg-teal-600 hover:file:text-white file:cursor-pointer file:transition-all cursor-pointer"
               style={{ color: "var(--adm-text-muted)" }} />
           </div>
           <div>
@@ -141,12 +141,12 @@ export default function AdminNewsManager() {
           {items.map((item) => (
             <div key={item.id} className="rounded-xl p-4 flex flex-col sm:flex-row gap-4"
               style={{ background: "var(--adm-surface)", border: "1px solid var(--adm-border)", boxShadow: "0 2px 8px var(--adm-shadow)" }}>
-              {item.gambar_url && <img src={item.gambar_url} alt="" className="w-full sm:w-28 h-24 object-cover rounded-lg flex-shrink-0" />}
+              {item.gambar_url && <img src={item.gambar_url} alt="" className="w-full sm:w-28 h-24 object-cover rounded-lg shrink-0" />}
               <div className="flex-1 min-w-0 flex flex-col justify-between py-1">
                 <div>
                   <div className="flex items-start gap-2 mb-1">
                     <h4 className="font-bold text-sm truncate flex-1" style={{ color: "var(--adm-text)" }}>{item.judul}</h4>
-                  <span className="text-xs px-2 py-0.5 rounded-full font-semibold flex-shrink-0"
+                  <span className="text-xs px-2 py-0.5 rounded-full font-semibold shrink-0"
                     style={{
                       background: item.status === "publish" ? "var(--adm-teal-soft)" : "var(--adm-mist)",
                       color: item.status === "publish" ? "var(--adm-teal)" : "var(--adm-text-muted)",

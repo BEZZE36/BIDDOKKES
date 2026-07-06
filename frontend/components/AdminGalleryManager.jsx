@@ -112,7 +112,7 @@ export default function AdminGalleryManager() {
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">File {editId && "(opsional)"}</label>
           <input type="file" accept="image/*,video/*" onChange={(e) => setForm({ ...form, file: e.target.files[0] })}
-            className="text-sm file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-[#0D2E2B] file:text-[#0E8C82] hover:file:bg-[#0E8C82] hover:file:text-white file:cursor-pointer file:transition-all cursor-pointer"
+            className="text-sm file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-[#0D2E2B] file:text-teal-600 hover:file:bg-teal-600 hover:file:text-white file:cursor-pointer file:transition-all cursor-pointer"
             style={{ color: "var(--adm-text-muted)" }} />
         </div>
         {msg.text && <p className="text-sm mb-3 font-semibold" style={{ color: msg.ok ? "var(--adm-teal)" : "#F87171" }}>{msg.text}</p>}

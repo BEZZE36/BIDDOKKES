@@ -46,7 +46,7 @@ export default function ConfirmModal({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={onCancel}
-            className="fixed inset-0 z-[9998]"
+            className="fixed inset-0 z-9998"
             style={{ backdropFilter: "blur(6px)", background: "rgba(0,0,0,0.55)" }}
           />
 
@@ -57,7 +57,7 @@ export default function ConfirmModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 24 }}
             transition={{ type: "spring", stiffness: 380, damping: 28 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center px-4 pointer-events-none"
+            className="fixed inset-0 z-9999 flex items-center justify-center px-4 pointer-events-none"
           >
             <div
               className="pointer-events-auto w-full max-w-sm rounded-2xl p-6 shadow-2xl relative overflow-hidden"

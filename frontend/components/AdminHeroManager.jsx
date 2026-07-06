@@ -162,7 +162,7 @@ export default function AdminHeroManager() {
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">Gambar Background {editId && "(opsional)"}</label>
           <input type="file" accept="image/*" onChange={(e) => setForm({ ...form, file: e.target.files[0] })}
-            className="text-sm file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-[#0D2E2B] file:text-[#0E8C82] hover:file:bg-[#0E8C82] hover:file:text-white file:cursor-pointer file:transition-all cursor-pointer"
+            className="text-sm file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-[#0D2E2B] file:text-teal-600 hover:file:bg-teal-600 hover:file:text-white file:cursor-pointer file:transition-all cursor-pointer"
             style={{ color: "var(--adm-text-muted)" }} />
           <p className="text-xs mt-1" style={{ color: "var(--adm-text-muted)" }}>Disarankan ukuran landscape (1920×1080+)</p>
         </div>
@@ -184,13 +184,13 @@ export default function AdminHeroManager() {
           {slides.map((slide, idx) => (
             <div key={slide.id} className="rounded-xl overflow-hidden flex gap-4 p-3 items-center"
               style={{ background: "var(--adm-surface)", border: "1px solid var(--adm-border)", boxShadow: "0 2px 8px var(--adm-shadow)" }}>
-              <img src={slide.image_url} alt={slide.judul} className="w-32 h-20 object-cover rounded-lg flex-shrink-0" />
+              <img src={slide.image_url} alt={slide.judul} className="w-32 h-20 object-cover rounded-lg shrink-0" />
               <div className="flex-1 min-w-0">
                 <p className="font-bold text-sm truncate" style={{ color: "var(--adm-text)" }}>{slide.judul}</p>
                 <p className="text-xs mt-1 truncate" style={{ color: "var(--adm-text-muted)" }}>{slide.subtitle}</p>
                 <p className="text-xs mt-1 font-mono" style={{ color: "var(--adm-teal)" }}>Urutan: {slide.urutan}</p>
               </div>
-              <div className="flex flex-col gap-1 flex-shrink-0">
+              <div className="flex flex-col gap-1 shrink-0">
                 <button onClick={() => moveSlide(slide.id, -1)} disabled={idx === 0}
                   className="text-xs px-2 py-1 rounded font-bold disabled:opacity-30 transition-opacity"
                   style={{ background: "var(--adm-mist)", color: "var(--adm-text)" }}>▲</button>
@@ -198,7 +198,7 @@ export default function AdminHeroManager() {
                   className="text-xs px-2 py-1 rounded font-bold disabled:opacity-30 transition-opacity"
                   style={{ background: "var(--adm-mist)", color: "var(--adm-text)" }}>▼</button>
               </div>
-              <div className="flex gap-2 flex-shrink-0">
+              <div className="flex gap-2 shrink-0">
                 <button onClick={() => startEdit(slide)} className="text-xs px-3 py-1.5 rounded font-semibold"
                   style={{ background: "var(--adm-teal-soft)", color: "var(--adm-teal)" }}>Edit</button>
                 <button onClick={() => handleDelete(slide.id)} className="text-xs px-3 py-1.5 rounded font-semibold"
