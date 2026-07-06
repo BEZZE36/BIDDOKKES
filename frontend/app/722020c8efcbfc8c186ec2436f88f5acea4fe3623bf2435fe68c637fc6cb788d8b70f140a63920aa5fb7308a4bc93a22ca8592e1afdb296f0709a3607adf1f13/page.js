@@ -10,6 +10,11 @@ export default function SuperAdminPage() {
   const [successMsg, setSuccessMsg] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // dataLoaded menggantikan pengecekan "!formData.pin_superadmin" yang lama,
+  // karena PIN tidak lagi disimpan/di-fetch ke state client sama sekali.
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [verifying, setVerifying] = useState(false);
+
   const [formData, setFormData] = useState({
     is_maintenance_public: false,
     is_maintenance_admin: false,
@@ -19,16 +24,20 @@ export default function SuperAdminPage() {
     deskripsi_maintenance_admin: "",
     waktu_selesai_public: "",
     waktu_selesai_admin: "",
-    pin_superadmin: "",
   });
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
       if (!supabase) return;
+      // PENTING: pin_superadmin SENGAJA tidak di-select di sini.
+      // Kolom itu sekarang cuma boleh dibaca lewat server (API route),
+      // bukan langsung dari client. Jangan tambahkan lagi ke select().
       const { data } = await supabase
         .from("pengaturan_sistem")
-        .select("*")
+        .select(
+          "is_maintenance_public, is_maintenance_admin, judul_maintenance_public, judul_maintenance_admin, deskripsi_maintenance_public, deskripsi_maintenance_admin, waktu_selesai_public, waktu_selesai_admin"
+        )
         .eq("id", 1)
         .single();
       if (data) {
@@ -45,21 +54,34 @@ export default function SuperAdminPage() {
           waktu_selesai_admin: data.waktu_selesai_admin
             ? new Date(data.waktu_selesai_admin).toISOString().slice(0, 16)
             : "",
-          pin_superadmin: data.pin_superadmin,
         });
       }
+      setDataLoaded(true);
       setLoading(false);
     }
     fetchData();
   }, []);
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
-    if (pinInput === formData.pin_superadmin) {
-      setIsAuthenticated(true);
-      setErrorMsg("");
-    } else {
-      setErrorMsg("PIN salah! Akses ditolak.");
+    setErrorMsg("");
+    setVerifying(true);
+    try {
+      const res = await fetch("/api/verify-superadmin-pin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pin: pinInput }),
+      });
+      const result = await res.json();
+      if (res.ok && result.success) {
+        setIsAuthenticated(true);
+      } else {
+        setErrorMsg(result.message || "PIN salah! Akses ditolak.");
+      }
+    } catch (err) {
+      setErrorMsg("Gagal menghubungi server. Coba lagi.");
+    } finally {
+      setVerifying(false);
     }
   }
 
@@ -98,21 +120,27 @@ export default function SuperAdminPage() {
       const updatePayload = {
         [type]: false,
         waktu_mulai: isAnyActive ? new Date().toISOString() : null,
-        updated_at: new Date().toISOString(),
       };
 
-      const { error } = await supabase
-        .from("pengaturan_sistem")
-        .update(updatePayload)
-        .eq("id", 1);
-      if (error) {
-        setErrorMsg("Gagal mematikan mode: " + error.message);
+      try {
+        const res = await fetch("/api/superadmin/update-settings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatePayload),
+        });
+        const result = await res.json();
+        if (!res.ok || !result.success) {
+          setErrorMsg("Gagal mematikan mode: " + (result.message || "Unknown error"));
+          setTimeout(() => setErrorMsg(""), 5000);
+        } else {
+          setSuccessMsg(
+            `Status ${type === "is_maintenance_public" ? "Publik" : "Admin"} DIBUKA!`,
+          );
+          setTimeout(() => setSuccessMsg(""), 4000);
+        }
+      } catch (err) {
+        setErrorMsg("Gagal menghubungi server.");
         setTimeout(() => setErrorMsg(""), 5000);
-      } else {
-        setSuccessMsg(
-          `Status ${type === "is_maintenance_public" ? "Publik" : "Admin"} DIBUKA!`,
-        );
-        setTimeout(() => setSuccessMsg(""), 4000);
       }
     } else {
       // Jika toggle dihidupkan (true), hanya ubah state. Wajib tekan tombol Terapkan.
@@ -137,15 +165,24 @@ export default function SuperAdminPage() {
       waktu_selesai_public: null,
       waktu_selesai_admin: null,
       waktu_mulai: null,
-      updated_at: new Date().toISOString(),
     };
-    const { error } = await supabase
-      .from("pengaturan_sistem")
-      .update(updatePayload)
-      .eq("id", 1);
-    if (!error) {
-      setSuccessMsg("Semua akses berhasil DIBUKA secara instan!");
-      setTimeout(() => setSuccessMsg(""), 4000);
+    try {
+      const res = await fetch("/api/superadmin/update-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatePayload),
+      });
+      const result = await res.json();
+      if (result.success) {
+        setSuccessMsg("Semua akses berhasil DIBUKA secara instan!");
+        setTimeout(() => setSuccessMsg(""), 4000);
+      } else {
+        setErrorMsg("Gagal membuka akses: " + (result.message || "Unknown error"));
+        setTimeout(() => setErrorMsg(""), 5000);
+      }
+    } catch (err) {
+      setErrorMsg("Gagal menghubungi server.");
+      setTimeout(() => setErrorMsg(""), 5000);
     }
   }
 
@@ -172,27 +209,32 @@ export default function SuperAdminPage() {
       waktu_selesai_admin: formData.waktu_selesai_admin
         ? new Date(formData.waktu_selesai_admin).toISOString()
         : null,
-      updated_at: new Date().toISOString(),
     };
 
-    const { error } = await supabase
-      .from("pengaturan_sistem")
-      .update(updateData)
-      .eq("id", 1);
-
-    if (error) {
-      setErrorMsg("Gagal menyimpan pengaturan: " + error.message);
+    try {
+      const res = await fetch("/api/superadmin/update-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateData),
+      });
+      const result = await res.json();
+      if (!res.ok || !result.success) {
+        setErrorMsg("Gagal menyimpan pengaturan: " + (result.message || "Unknown error"));
+        setTimeout(() => setErrorMsg(""), 5000);
+      } else {
+        setSuccessMsg(
+          "Pengaturan berhasil disimpan! Perubahan langsung aktif di seluruh website.",
+        );
+        setTimeout(() => setSuccessMsg(""), 4000);
+      }
+    } catch (err) {
+      setErrorMsg("Gagal menghubungi server.");
       setTimeout(() => setErrorMsg(""), 5000);
-    } else {
-      setSuccessMsg(
-        "Pengaturan berhasil disimpan! Perubahan langsung aktif di seluruh website.",
-      );
-      setTimeout(() => setSuccessMsg(""), 4000);
     }
     setLoading(false);
   }
 
-  if (loading && !formData.pin_superadmin) {
+  if (loading && !dataLoaded) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-900">
         <div className="w-8 h-8 border-4 border-teal-500 rounded-full border-t-transparent animate-spin" />
@@ -234,9 +276,10 @@ export default function SuperAdminPage() {
             )}
             <button
               type="submit"
-              className="w-full bg-teal-600 hover:bg-teal-500 text-[#ffffff] font-bold py-3 rounded-lg transition-colors font-mono"
+              disabled={verifying}
+              className="w-full bg-teal-600 hover:bg-teal-500 disabled:opacity-50 text-[#ffffff] font-bold py-3 rounded-lg transition-colors font-mono"
             >
-              Unlock
+              {verifying ? "Memverifikasi..." : "Unlock"}
             </button>
           </form>
         </motion.div>
