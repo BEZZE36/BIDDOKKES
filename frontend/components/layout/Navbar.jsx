@@ -140,8 +140,7 @@ export default function Header() {
               <>
                 <motion.span
                   animate={{ 
-                    textShadow: ["0px 0px 5px rgba(217,164,65,0)", "0px 0px 20px rgba(217,164,65,1)", "0px 0px 5px rgba(217,164,65,0)"],
-                    color: ["var(--color-navy-900)", "#FDE68A", "var(--color-navy-900)"]
+                    textShadow: ["0px 0px 5px rgba(217,164,65,0)", "0px 0px 20px rgba(217,164,65,1)", "0px 0px 5px rgba(217,164,65,0)"]
                   }}
                   transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
                   className="block text-sm font-bold"
@@ -151,8 +150,7 @@ export default function Header() {
                 </motion.span>
                 <motion.span
                   animate={{ 
-                    textShadow: ["0px 0px 5px rgba(14,140,130,0)", "0px 0px 15px rgba(14,140,130,1)", "0px 0px 5px rgba(14,140,130,0)"],
-                    color: ["var(--color-ink-500)", "#99F6E4", "var(--color-ink-500)"]
+                    textShadow: ["0px 0px 5px rgba(14,140,130,0)", "0px 0px 15px rgba(14,140,130,1)", "0px 0px 5px rgba(14,140,130,0)"]
                   }}
                   transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut", delay: 1.25 }}
                   className="block text-xs"

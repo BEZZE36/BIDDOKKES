@@ -81,7 +81,6 @@ export default function Footer() {
                           "0px 0px 20px rgba(217,164,65,1)",
                           "0px 0px 5px rgba(217,164,65,0)",
                         ],
-                        color: ["#ffffff", "#FDE68A", "#ffffff"],
                       }}
                       transition={{
                         repeat: Infinity,
@@ -98,11 +97,6 @@ export default function Footer() {
                           "0px 0px 5px rgba(14,140,130,0)",
                           "0px 0px 15px rgba(14,140,130,1)",
                           "0px 0px 5px rgba(14,140,130,0)",
-                        ],
-                        color: [
-                          "rgba(255,255,255,0.6)",
-                          "#99F6E4",
-                          "rgba(255,255,255,0.6)",
                         ],
                       }}
                       transition={{
