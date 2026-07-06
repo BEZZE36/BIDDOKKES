@@ -27,7 +27,7 @@ export default function Footer() {
     <footer
       id="site-footer"
       className="pt-12 pb-6 relative overflow-clip"
-      style={{ background: "var(--color-navy-900)", color: "white" }}
+      style={{ background: "var(--color-brand-navy)", color: "white" }}
     >
       {/* Animated background orbs */}
       <motion.div

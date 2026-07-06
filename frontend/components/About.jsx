@@ -300,7 +300,7 @@ export default function About() {
           className="mt-6 rounded-2xl relative p-px overflow-hidden"
           style={{
             background:
-              "linear-gradient(135deg, var(--color-navy-900) 0%, #14315A 60%, #0B2340 100%)",
+              "linear-gradient(135deg, var(--color-brand-navy) 0%, #14315A 60%, #0B2340 100%)",
             border: "1px solid rgba(217,164,65,0.4)",
           }}
         >
