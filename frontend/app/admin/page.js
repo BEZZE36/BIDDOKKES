@@ -9,6 +9,7 @@ import AdminHeroManager from "../../components/AdminHeroManager";
 import AdminAboutManager from "../../components/AdminAboutManager";
 import AdminContactManager from "../../components/AdminContactManager";
 import AdminHome from "../../components/AdminHome";
+import AdminMaintenanceManager from "../../components/AdminMaintenanceManager";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function AdminDashboard() {
@@ -112,6 +113,7 @@ export default function AdminDashboard() {
     { key: "pesan", label: "✉️ Pesan Kontak", id: "tab-pesan" },
     { key: "hero", label: "🖼️ Hero Slider", id: "tab-hero" },
     { key: "about", label: "👤 Foto Tentang", id: "tab-about" },
+    { key: "pengaturan", label: "⚙️ Pengaturan", id: "tab-pengaturan" },
   ];
 
   return (
@@ -259,6 +261,7 @@ export default function AdminDashboard() {
               {tab === "pesan" && <AdminContactManager />}
               {tab === "hero" && <AdminHeroManager />}
               {tab === "about" && <AdminAboutManager />}
+              {tab === "pengaturan" && <AdminMaintenanceManager />}
             </motion.div>
           </AnimatePresence>
         </div>

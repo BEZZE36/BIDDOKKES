@@ -90,7 +90,7 @@ export default function VisitorCounter({ className = "", style = {} }) {
       supabase.removeChannel(channel);
       clearInterval(poll);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, []);
 
   if (!loaded) return null;

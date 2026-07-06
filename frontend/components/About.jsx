@@ -6,8 +6,8 @@ import { ABOUT_DATA } from "../data/aboutData";
 import { supabase } from "../lib/supabaseClient";
 import VisitorCounter from "./animations/VisitorCounter";
 
-const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
-
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
 
 function CountUp({ target, suffix = "" }) {
   const [count, setCount] = useState(0);
@@ -33,13 +33,18 @@ function CountUp({ target, suffix = "" }) {
           observer.unobserve(el);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, [target]);
 
-  return <span ref={ref}>{count}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
 }
 
 export default function About() {
@@ -59,19 +64,37 @@ export default function About() {
   }, []);
 
   return (
-    <section id="tentang" className="py-16 sm:py-24 relative overflow-hidden" style={{ background: "var(--color-white)" }}>
+    <section
+      id="tentang"
+      className="py-16 sm:py-24 relative overflow-hidden"
+      style={{ background: "var(--color-white)" }}
+    >
       {/* Floating background blobs */}
       <motion.div
         animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-20 left-0 w-[500px] h-[500px] rounded-full pointer-events-none opacity-[0.03]"
-        style={{ background: "radial-gradient(circle, var(--color-navy-900), transparent 70%)" }}
+        style={{
+          background:
+            "radial-gradient(circle, var(--color-navy-900), transparent 70%)",
+        }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <ScrollReveal>
-          <p className="text-xs tracking-[0.15em] uppercase font-semibold mb-3" style={{ color: "var(--color-teal-600)", fontFamily: "var(--font-mono)" }}>Profil Instansi</p>
-          <h2 className="mb-10 lg:mb-16" style={{ color: "var(--color-navy-900)" }}>
+          <p
+            className="text-xs tracking-[0.15em] uppercase font-semibold mb-3"
+            style={{
+              color: "var(--color-teal-600)",
+              fontFamily: "var(--font-mono)",
+            }}
+          >
+            Profil Instansi
+          </p>
+          <h2
+            className="mb-10 lg:mb-16"
+            style={{ color: "var(--color-navy-900)" }}
+          >
             Tentang Biddokkes Polda Sulteng
           </h2>
         </ScrollReveal>
@@ -83,13 +106,13 @@ export default function About() {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl group bg-white p-4">
                 <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src={profileImage} 
-                  alt="Profil Biddokkes" 
+                <img
+                  src={profileImage}
+                  alt="Profil Biddokkes"
                   className="w-full h-auto object-contain transform group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
-              
+
               {/* Floating Tribrata Badge Decoration */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -99,14 +122,44 @@ export default function About() {
                 className="absolute -bottom-6 -right-6 bg-white dark:bg-[#1A2332] p-4 rounded-xl shadow-xl border border-gray-100 dark:border-[rgba(255,255,255,0.1)] flex items-center gap-4"
               >
                 <div className="w-12 h-14 relative shrink-0">
-                  <div className="absolute inset-0 rounded-t-xl" style={{ background: "linear-gradient(180deg, var(--color-gold-500) 0%, var(--color-gold-600) 100%)", clipPath: "polygon(50% 100%, 0 25%, 0 0, 100% 0, 100% 25%)" }} />
-                  <div className="absolute inset-1 rounded-t-lg flex items-center justify-center" style={{ background: "#0B2340", clipPath: "polygon(50% 100%, 0 25%, 0 0, 100% 0, 100% 25%)" }}>
-                    <span className="text-xs" style={{ color: "var(--color-gold-500)" }}>★</span>
+                  <div
+                    className="absolute inset-0 rounded-t-xl"
+                    style={{
+                      background:
+                        "linear-gradient(180deg, var(--color-gold-500) 0%, var(--color-gold-600) 100%)",
+                      clipPath:
+                        "polygon(50% 100%, 0 25%, 0 0, 100% 0, 100% 25%)",
+                    }}
+                  />
+                  <div
+                    className="absolute inset-1 rounded-t-lg flex items-center justify-center"
+                    style={{
+                      background: "#0B2340",
+                      clipPath:
+                        "polygon(50% 100%, 0 25%, 0 0, 100% 0, 100% 25%)",
+                    }}
+                  >
+                    <span
+                      className="text-xs"
+                      style={{ color: "var(--color-gold-500)" }}
+                    >
+                      ★
+                    </span>
                   </div>
                 </div>
                 <div>
-                  <p className="text-xs tracking-[0.2em] font-bold" style={{ fontFamily: "var(--font-mono)", color: "var(--color-gold-500)" }}>TRIBRATA</p>
-                  <p className="text-[10px] uppercase font-semibold opacity-70">Pengabdian</p>
+                  <p
+                    className="text-xs tracking-[0.2em] font-bold"
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      color: "var(--color-gold-500)",
+                    }}
+                  >
+                    TRIBRATA
+                  </p>
+                  <p className="text-[10px] uppercase font-semibold opacity-70">
+                    Pengabdian
+                  </p>
                 </div>
               </motion.div>
             </ScrollReveal>
@@ -115,20 +168,36 @@ export default function About() {
           {/* Right Column: Text */}
           <div className="lg:col-span-7 space-y-8 lg:pt-4">
             <ScrollReveal delay={150}>
-              <p className="text-base sm:text-lg leading-relaxed" style={{ color: "var(--color-ink-500)" }}>
+              <p
+                className="text-base sm:text-lg leading-relaxed"
+                style={{ color: "var(--color-ink-500)" }}
+              >
                 {ABOUT_DATA.description}
               </p>
             </ScrollReveal>
 
             <ScrollReveal delay={200}>
-              <h3 className="text-xl sm:text-2xl font-bold mb-3" style={{ color: "var(--color-navy-900)" }}>Visi</h3>
-              <p className="text-base leading-relaxed font-medium" style={{ color: "var(--color-ink-500)" }}>
+              <h3
+                className="text-xl sm:text-2xl font-bold mb-3"
+                style={{ color: "var(--color-navy-900)" }}
+              >
+                Visi
+              </h3>
+              <p
+                className="text-base leading-relaxed font-medium"
+                style={{ color: "var(--color-ink-500)" }}
+              >
                 {ABOUT_DATA.visi}
               </p>
             </ScrollReveal>
 
             <ScrollReveal delay={250}>
-              <h3 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: "var(--color-navy-900)" }}>Misi</h3>
+              <h3
+                className="text-xl sm:text-2xl font-bold mb-4"
+                style={{ color: "var(--color-navy-900)" }}
+              >
+                Misi
+              </h3>
               <ul className="space-y-3">
                 {ABOUT_DATA.misi.map((m, i) => (
                   <motion.li
@@ -140,7 +209,10 @@ export default function About() {
                     className="flex items-start gap-3 text-base"
                     style={{ color: "var(--color-ink-500)" }}
                   >
-                    <span className="mt-2 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "var(--color-teal-600)" }} />
+                    <span
+                      className="mt-2 w-1.5 h-1.5 rounded-full shrink-0"
+                      style={{ background: "var(--color-teal-600)" }}
+                    />
                     <span className="flex-1">{m}</span>
                   </motion.li>
                 ))}
@@ -148,9 +220,18 @@ export default function About() {
             </ScrollReveal>
 
             <ScrollReveal delay={300}>
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 mt-8" style={{ color: "var(--color-navy-900)" }}>Sasaran Strategis Biddokkes Polda Sulteng</h3>
-              <p className="text-base mb-4" style={{ color: "var(--color-ink-500)" }}>
-                Biddokkes Polda Sulteng memiliki Sasaran Strategis sebagai berikut:
+              <h3
+                className="text-xl sm:text-2xl font-bold mb-4 mt-8"
+                style={{ color: "var(--color-navy-900)" }}
+              >
+                Sasaran Strategis Biddokkes Polda Sulteng
+              </h3>
+              <p
+                className="text-base mb-4"
+                style={{ color: "var(--color-ink-500)" }}
+              >
+                Biddokkes Polda Sulteng memiliki Sasaran Strategis sebagai
+                berikut:
               </p>
               <ul className="space-y-3">
                 {ABOUT_DATA.sasaranStrategis.map((s, i) => (
@@ -163,7 +244,10 @@ export default function About() {
                     className="flex items-start gap-3 text-base"
                     style={{ color: "var(--color-ink-500)" }}
                   >
-                    <span className="mt-2 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "var(--color-gold-500)" }} />
+                    <span
+                      className="mt-2 w-1.5 h-1.5 rounded-full shrink-0"
+                      style={{ background: "var(--color-gold-500)" }}
+                    />
                     <span className="flex-1">{s}</span>
                   </motion.li>
                 ))}
@@ -187,10 +271,21 @@ export default function About() {
               style={{ background: "var(--color-mist)" }}
             >
               <p className="text-3xl mb-2">{stat.icon}</p>
-              <p className="text-4xl font-bold mb-1" style={{ color: "var(--color-teal-600)", fontFamily: "var(--font-display)" }}>
+              <p
+                className="text-4xl font-bold mb-1"
+                style={{
+                  color: "var(--color-teal-600)",
+                  fontFamily: "var(--font-display)",
+                }}
+              >
                 <CountUp target={stat.value} suffix={stat.suffix} />
               </p>
-              <p className="text-sm font-medium mt-2" style={{ color: "var(--color-ink-500)" }}>{stat.label}</p>
+              <p
+                className="text-sm font-medium mt-2"
+                style={{ color: "var(--color-ink-500)" }}
+              >
+                {stat.label}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -204,9 +299,11 @@ export default function About() {
           id="visitor-counter-card"
           className="mt-6 rounded-2xl overflow-hidden relative"
           style={{
-            background: "linear-gradient(135deg, var(--color-navy-900) 0%, #14315A 60%, #0B2340 100%)",
+            background:
+              "linear-gradient(135deg, var(--color-navy-900) 0%, #14315A 60%, #0B2340 100%)",
             border: "1px solid rgba(217,164,65,0.35)",
-            boxShadow: "0 8px 32px rgba(11,35,64,0.4), inset 0 1px 0 rgba(217,164,65,0.15)",
+            boxShadow:
+              "0 8px 32px rgba(11,35,64,0.4), inset 0 1px 0 rgba(217,164,65,0.15)",
           }}
         >
           {/* Decorative background numeral */}
@@ -242,13 +339,16 @@ export default function About() {
               </div>
 
               <p
-                className="text-sm sm:text-base tracking-[0.1em] uppercase font-bold"
+                className="text-sm sm:text-base tracking-widest uppercase font-bold"
                 style={{ color: "#D9A441", fontFamily: "var(--font-mono)" }}
               >
                 🌐 Total Pengunjung Website
               </p>
-              <p className="text-xs sm:text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
-                Diperbarui otomatis — tidak perlu refresh halaman
+              <p
+                className="text-xs sm:text-sm leading-relaxed"
+                style={{ color: "rgba(255,255,255,0.55)" }}
+              >
+                Real Time Visitor
               </p>
             </div>
 
@@ -261,12 +361,16 @@ export default function About() {
                   background: "rgba(0,0,0,0.3)",
                   backdropFilter: "blur(8px)",
                   border: "1px solid rgba(217,164,65,0.2)",
-                  boxShadow: "0 0 20px rgba(217,164,65,0.12), inset 0 1px 0 rgba(255,255,255,0.05)",
+                  boxShadow:
+                    "0 0 20px rgba(217,164,65,0.12), inset 0 1px 0 rgba(255,255,255,0.05)",
                 }}
               />
               <span
                 className="text-sm font-semibold pb-1"
-                style={{ color: "rgba(255,255,255,0.45)", fontFamily: "var(--font-mono)" }}
+                style={{
+                  color: "rgba(255,255,255,0.45)",
+                  fontFamily: "var(--font-mono)",
+                }}
               >
                 kunjungan
               </span>
