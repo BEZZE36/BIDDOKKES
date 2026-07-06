@@ -39,7 +39,9 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-xl font-bold bg-gold-500 text-navy-900">B</div>
+          <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center overflow-hidden">
+            <img src="https://storage.pusdokkes.polri.go.id/pusdokkes/logo.png" alt="Logo Pusdokkes" className="w-full h-full object-contain" />
+          </div>
           <h2 className="text-[#ffffff] text-xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Panel Admin</h2>
           <p className="text-sm mt-1 text-[#ffffff]/60">Biddokkes Polda Sulawesi Tengah</p>
         </div>
