@@ -9,53 +9,39 @@ export default function SplashScreen() {
   const pathname = usePathname();
   const videoRef = useRef(null);
 
-  // ── Timer: dismiss splash after video ends or after max timeout ──────
+  // ── Session Storage & Safety Timeout ──────
   useEffect(() => {
     if (pathname !== "/") {
       setShowSplash(false);
       return;
     }
 
-    // Only show splash screen once per session/hard refresh
+    // Kembalikan batasan: Hanya muncul 1 kali per sesi (sesuai permintaan)
     const hasSeenSplash = sessionStorage.getItem("hasSeenSplash");
-
     if (hasSeenSplash) {
       setShowSplash(false);
       return;
     }
-
-    // Mark as seen so it doesn't show again on navigation
     sessionStorage.setItem("hasSeenSplash", "true");
 
-    // The generated video is 4 seconds.
-    // Start fading out at 4.2 seconds.
-    const fadeTimer = setTimeout(() => {
-      setIsFadingOut(true);
-    }, 4200);
+    // Jika setelah 8 detik video macet/lambat (12MB), tutup paksa saja
+    const safetyTimer = setTimeout(() => {
+      dismiss();
+    }, 8000);
 
-    // Completely remove component from DOM at 5 seconds
-    const removeTimer = setTimeout(() => {
-      setShowSplash(false);
-    }, 5000);
-
-    return () => {
-      clearTimeout(fadeTimer);
-      clearTimeout(removeTimer);
-    };
+    return () => clearTimeout(safetyTimer);
   }, [pathname]);
 
-  // ── Video play logic — runs once after component mounts ──────────────
-  // Does NOT use a short safety timer. Instead relies on onError (JSX).
+  // ── Video play logic ──────────────
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !showSplash) return;
 
-    // Try to play as soon as the browser has enough data
     const tryPlay = () => {
       video.play().catch(() => {
-        // Autoplay policy blocked — still show black screen with timers,
-        // which is better than no splash at all.
-        // The main timers (4200ms / 5000ms) will still dismiss it.
+        // Autoplay diblokir browser (misal mode hemat daya/Safari)
+        // Langsung tutup splash screen daripada layar hitam
+        dismiss();
       });
     };
 
