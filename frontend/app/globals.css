@@ -24,7 +24,6 @@
 
   --animate-fade-up: fade-up 0.5s ease-out forwards;
   --animate-fade-in: fade-in 0.5s ease-out forwards;
-  --animate-slide-down: slide-down 0.22s ease forwards;
 
   @keyframes fade-up {
     from { opacity: 0; transform: translateY(16px); }
@@ -33,10 +32,6 @@
   @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
-  }
-  @keyframes slide-down {
-    from { max-height: 0; opacity: 0; }
-    to { max-height: 800px; opacity: 1; }
   }
 }
 
@@ -280,12 +275,17 @@ h3 { font-size: 1.15rem; line-height: 1.35; }
 }
 .accordion-icon.open { transform: rotate(45deg); }
 .accordion-content {
-  overflow: hidden; max-height: 0; opacity: 0;
-  transition: max-height 0.22s ease, opacity 0.22s ease, padding 0.22s ease;
-  padding: 0 0;
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.22s ease, opacity 0.22s ease;
+}
+.accordion-content > * {
+  overflow: hidden;
 }
 .accordion-content.open {
-  max-height: 800px; opacity: 1; padding-bottom: 1rem;
+  grid-template-rows: 1fr;
+  opacity: 1;
 }
 
 /* ── Scroll Reveal ─────────────────────────────── */
