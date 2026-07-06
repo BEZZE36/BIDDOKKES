@@ -12,14 +12,13 @@ export default function SplashScreen() {
   // ── Session Storage & Safety Timeout ──────
   useEffect(() => {
     if (pathname !== "/") {
-      setShowSplash(false);
       return;
     }
 
     // Kembalikan batasan: Hanya muncul 1 kali per sesi (sesuai permintaan)
     const hasSeenSplash = sessionStorage.getItem("hasSeenSplash");
     if (hasSeenSplash) {
-      setShowSplash(false);
+      setTimeout(() => setShowSplash(false), 0);
       return;
     }
     sessionStorage.setItem("hasSeenSplash", "true");
@@ -56,10 +55,10 @@ export default function SplashScreen() {
     };
   }, [showSplash]);
 
-  const dismiss = () => {
+  function dismiss() {
     setIsFadingOut(true);
     setTimeout(() => setShowSplash(false), 700);
-  };
+  }
 
   // If user navigates or has already seen it, don't render anything
   if (pathname !== "/") return null;
