@@ -133,7 +133,7 @@ export default function Header() {
         <Link href={logoHref} className="flex items-center gap-3 no-underline">
           <div className="relative w-10 h-10">
             <Image
-              src="/logo.png"
+              src="https://storage.pusdokkes.polri.go.id/pusdokkes/logo.png"
               alt="Logo Biddokkes"
               fill
               sizes="40px"
