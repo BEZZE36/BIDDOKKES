@@ -64,8 +64,8 @@ export default function Gallery() {
                   onClick={() => setLightbox({ src: item.media_url, alt: item.judul })}
                 >
                   {item.tipe_media === "video" ? (
-                    <div className="relative w-full aspect-4/3">
-                      <video src={item.media_url} preload="none" className="w-full aspect-4/3 object-cover" muted />
+                    <div className="relative">
+                      <video src={item.media_url} className="w-full aspect-4/3 object-cover" muted />
                       <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                         <span className="text-3xl">▶️</span>
                       </div>
