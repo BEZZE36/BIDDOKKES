@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useTheme } from "../ThemeProvider";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import ShinyText from "../animations/ShinyText";
 
@@ -130,11 +131,16 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
         {/* Logo */}
         <Link href={logoHref} className="flex items-center gap-3 no-underline">
-          <img
-            src="https://storage.pusdokkes.polri.go.id/pusdokkes/logo.png"
-            alt="Logo Biddokkes"
-            className="w-10 h-10 object-contain"
-          />
+          <div className="relative w-10 h-10">
+            <Image
+              src="https://storage.pusdokkes.polri.go.id/pusdokkes/logo.png"
+              alt="Logo Biddokkes"
+              fill
+              sizes="40px"
+              priority={true}
+              className="object-contain"
+            />
+          </div>
           <div className="flex flex-col ml-1">
             <span className="block text-sm font-bold" style={{ color: dark ? "#FFFFFF" : "var(--color-navy-900)" }}>
               <ShinyText text="BIDDOKKES" speed={4} />
