@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export default function Lightbox({ src, alt, onClose }) {
   // Close on Escape key
@@ -50,12 +51,16 @@ export default function Lightbox({ src, alt, onClose }) {
               border: "2px solid rgba(217,164,65,0.4)",
             }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={src}
-              alt={alt}
-              style={{ display: "block", maxWidth: "90vw", maxHeight: "85vh", objectFit: "contain" }}
-            />
+            {/* next/image optimization for Lightbox */}
+            <div style={{ position: "relative", width: "90vw", height: "85vh" }}>
+              <Image
+                src={src}
+                alt={alt}
+                fill
+                sizes="90vw"
+                style={{ objectFit: "contain" }}
+              />
+            </div>
             {/* Close button */}
             <button
               onClick={onClose}

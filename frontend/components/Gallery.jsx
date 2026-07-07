@@ -2,6 +2,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 import Lightbox from "./animations/Lightbox";
 import { motion } from "framer-motion";
@@ -70,12 +71,16 @@ export default function Gallery() {
                       </div>
                     </div>
                   ) : (
-                      <img
-                        src={item.media_url}
-                        alt={item.judul}
-                        className="w-full aspect-4/3 object-cover"
-                        loading="lazy"
-                      />
+                      <div className="relative w-full aspect-4/3">
+                        <Image
+                          src={item.media_url}
+                          alt={item.judul}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className="object-cover"
+                          loading="lazy"
+                        />
+                      </div>
                   )}
                   {(item.judul || item.deskripsi) && (
                     <div className="p-4 bg-white dark:bg-[#1A2332]">

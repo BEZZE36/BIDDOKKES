@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ABOUT_DATA } from "../data/aboutData";
 import { supabase } from "../lib/supabaseClient";
 import VisitorCounter from "./animations/VisitorCounter";
@@ -105,12 +106,16 @@ export default function About() {
             <ScrollReveal delay={100}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl group bg-white p-4">
                 <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={profileImage}
-                  alt="Profil Biddokkes"
-                  className="w-full h-auto object-contain transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
+                {/* next/image optimization */}
+                <div className="relative w-full aspect-square">
+                  <Image
+                    src={profileImage}
+                    alt="Profil Biddokkes"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-contain transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                </div>
               </div>
 
               {/* Floating Tribrata Badge Decoration */}

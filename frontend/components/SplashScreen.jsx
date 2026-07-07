@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function SplashScreen() {
   const [showSplash, setShowSplash] = useState(true);
@@ -89,7 +90,16 @@ export default function SplashScreen() {
         </video>
         {/* Gambar statis untuk mobile (lebih ringan & cepat) */}
         <div className="sm:hidden w-full h-full flex flex-col items-center justify-center animate-pulse">
-          <img src="https://storage.pusdokkes.polri.go.id/pusdokkes/logo.png" alt="Logo Biddokkes" className="w-32 h-32 mb-4 object-contain" />
+          <div className="relative w-32 h-32 mb-4">
+            <Image 
+              src="https://storage.pusdokkes.polri.go.id/pusdokkes/logo.png" 
+              alt="Logo Biddokkes" 
+              fill
+              sizes="128px"
+              priority={true}
+              className="object-contain" 
+            />
+          </div>
           <p className="text-white text-xl font-bold tracking-widest font-mono">BIDDOKKES</p>
         </div>
         {/* Penutup Watermark Gemini di Pojok Kanan Bawah */}

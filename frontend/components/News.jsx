@@ -2,6 +2,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { supabase } from "../lib/supabaseClient";
 import ScrollReveal from "./ScrollReveal";
 import SpotlightCard from "./animations/SpotlightCard";
@@ -83,7 +84,16 @@ export default function News() {
                   spotlightColor="rgba(14,140,130,0.10)"
                 >
                   {item.gambar_url && (
-                    <img src={item.gambar_url} alt={item.judul} className="w-full h-40 object-cover rounded-lg mb-3" loading="lazy" />
+                    <div className="relative w-full h-40 mb-3">
+                      <Image 
+                        src={item.gambar_url} 
+                        alt={item.judul} 
+                        fill 
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover rounded-lg" 
+                        loading="lazy" 
+                      />
+                    </div>
                   )}
                   <p className="text-xs mb-2" style={{ color: "var(--color-ink-500)", fontFamily: "var(--font-mono)" }}>
                     {new Date(item.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
