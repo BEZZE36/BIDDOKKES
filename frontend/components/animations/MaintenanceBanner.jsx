@@ -2,14 +2,103 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-export default function MaintenanceBanner({ data, target }) {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+const CountdownDisplay = ({ targetTime, endDate }) => {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isExpired, setIsExpired] = useState(false);
+
+  useEffect(() => {
+    if (!targetTime) return;
+    const updateTimer = () => {
+      const now = new Date().getTime();
+      const difference = targetTime - now;
+      if (difference <= 0) {
+        setIsExpired(true);
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      } else {
+        setIsExpired(false);
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        });
+      }
+    };
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+    return () => clearInterval(interval);
+  }, [targetTime]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.9 }}
+      className="rounded-2xl p-4 sm:p-6 mb-4"
+      style={{
+        background: "rgba(0,0,0,0.6)",
+        border: "1px solid rgba(255,255,255,0.05)",
+      }}
+    >
+      <p
+        className="text-sm font-semibold tracking-widest uppercase mb-4"
+        style={{ color: "#A5F3FC" }} // cyan-200 contrast
+      >
+        Estimasi Selesai
+      </p>
+
+      <div className="flex justify-center gap-4 sm:gap-8">
+        {[
+          { label: "Hari", value: timeLeft.days },
+          { label: "Jam", value: timeLeft.hours },
+          { label: "Menit", value: timeLeft.minutes },
+          { label: "Detik", value: timeLeft.seconds },
+        ].map((item, idx) => (
+          <div key={idx} className="flex flex-col items-center">
+            <div
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center mb-1 shadow-inner"
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.1)",
+              }}
+            >
+              <span
+                className="text-xl sm:text-2xl font-mono font-bold"
+                style={{ color: "#FFFFFF" }}
+              >
+                {String(item.value).padStart(2, "0")}
+              </span>
+            </div>
+            <span
+              className="text-xs sm:text-sm font-medium"
+              style={{ color: "#94A3B8" }}
+            >
+              {item.label}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {isExpired ? (
+        <p
+          className="text-sm mt-6 font-semibold font-mono animate-pulse"
+          style={{ color: "#DC2626" }}
+        >
+          &gt; PERINGATAN: BATAS WAKTU TERLAMPAUI
+        </p>
+      ) : (
+        <p
+          className="text-xs mt-6 font-mono"
+          style={{ color: "#94A3B8" }}
+        >
+          TARGET DEKRIPSI: {endDate} WITA
+        </p>
+      )}
+    </motion.div>
+  );
+};
+
+export default function MaintenanceBanner({ data, target }) {
   const [mounted, setMounted] = useState(false);
 
   // Blokir zoom dan matikan scroll latar belakang secara absolut
@@ -57,40 +146,8 @@ export default function MaintenanceBanner({ data, target }) {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line
     setMounted(true);
-    const targetWaktuSelesai =
-      target === "admin"
-        ? data?.waktu_selesai_admin
-        : data?.waktu_selesai_public;
-    if (!targetWaktuSelesai) return;
-
-    const targetTime = new Date(targetWaktuSelesai).getTime();
-
-    const updateTimer = () => {
-      const now = new Date().getTime();
-      const difference = targetTime - now;
-
-      if (difference <= 0) {
-        setIsExpired(true);
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      } else {
-        setIsExpired(false);
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor(
-            (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-          ),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000),
-        });
-      }
-    };
-
-    updateTimer();
-    const interval = setInterval(updateTimer, 1000);
-    return () => clearInterval(interval);
-  }, [data?.waktu_selesai_public, data?.waktu_selesai_admin, target]);
+  }, []);
 
   if (!mounted) return null;
 
@@ -116,6 +173,7 @@ export default function MaintenanceBanner({ data, target }) {
         minute: "2-digit",
       })
     : "";
+  const targetTimeValue = targetWaktuSelesaiForDate ? new Date(targetWaktuSelesaiForDate).getTime() : null;
 
   return (
     <div
@@ -206,7 +264,7 @@ export default function MaintenanceBanner({ data, target }) {
         }}
       ></div>
 
-      {/* Background Ambient Animation */}
+      {/* Background Ambient Animation (Hidden di mobile untuk performa) */}
       <motion.div
         animate={{
           scale: [1, 1.2, 1],
@@ -214,7 +272,7 @@ export default function MaintenanceBanner({ data, target }) {
           rotate: [0, 90, 0],
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute w-[800px] h-[800px] rounded-full blur-[120px] pointer-events-none"
+        className="absolute w-[800px] h-[800px] rounded-full blur-[120px] pointer-events-none hidden md:block"
         style={{
           background:
             "radial-gradient(circle, rgba(220,38,38,0.4) 0%, rgba(250,204,21,0.1) 100%)",
@@ -233,7 +291,7 @@ export default function MaintenanceBanner({ data, target }) {
           ease: "easeInOut",
           delay: 2,
         }}
-        className="absolute w-[600px] h-[600px] rounded-full blur-[100px] pointer-events-none"
+        className="absolute w-[600px] h-[600px] rounded-full blur-[100px] pointer-events-none hidden md:block"
         style={{
           background:
             "radial-gradient(circle, rgba(45,212,191,0.3) 0%, rgba(220,38,38,0.1) 100%)",
@@ -249,9 +307,8 @@ export default function MaintenanceBanner({ data, target }) {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-            className="backdrop-blur-xl p-5 sm:p-6 rounded-3xl shadow-2xl text-center flex flex-col w-full max-h-[95vh] overflow-y-auto"
+            className="md:backdrop-blur-xl p-5 sm:p-6 rounded-3xl shadow-2xl text-center flex flex-col w-full max-h-[95vh] overflow-y-auto bg-black/60 md:bg-white/5"
             style={{
-              background: "rgba(255,255,255,0.05)",
               border: "1px solid rgba(255,255,255,0.1)",
             }}
           >
@@ -277,8 +334,7 @@ export default function MaintenanceBanner({ data, target }) {
               style={{
                 fontFamily: "var(--font-mono)",
                 color: "#EF4444",
-                textShadow:
-                  "0 0 20px rgba(239,68,68,1), 0 0 40px rgba(220,38,38,0.8)",
+                textShadow: "0 2px 8px rgba(220,38,38,0.8)",
               }}
             >
               <motion.span
@@ -301,8 +357,8 @@ export default function MaintenanceBanner({ data, target }) {
               transition={{ delay: 0.7 }}
               className="text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-4 sm:mb-6 leading-relaxed font-mono font-bold"
               style={{
-                color: "#5EEAD4",
-                textShadow: "0 0 10px rgba(45,212,191,0.6)",
+                color: "#A5F3FC", // Cyan-200 for better contrast on dark bg
+                textShadow: "0 1px 3px rgba(0,0,0,0.8)",
               }}
             >
               &gt;{" "}
@@ -320,71 +376,7 @@ export default function MaintenanceBanner({ data, target }) {
             </motion.p>
 
             {targetWaktuSelesaiForDate && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
-                className="rounded-2xl p-4 sm:p-6 mb-4"
-                style={{
-                  background: "rgba(0,0,0,0.4)",
-                  border: "1px solid rgba(255,255,255,0.05)",
-                }}
-              >
-                <p
-                  className="text-sm font-semibold tracking-widest uppercase mb-4"
-                  style={{ color: "#2DD4BF" }}
-                >
-                  Estimasi Selesai
-                </p>
-
-                <div className="flex justify-center gap-4 sm:gap-8">
-                  {[
-                    { label: "Hari", value: timeLeft.days },
-                    { label: "Jam", value: timeLeft.hours },
-                    { label: "Menit", value: timeLeft.minutes },
-                    { label: "Detik", value: timeLeft.seconds },
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex flex-col items-center">
-                      <div
-                        className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center mb-1 shadow-inner"
-                        style={{
-                          background: "rgba(255,255,255,0.05)",
-                          border: "1px solid rgba(255,255,255,0.1)",
-                        }}
-                      >
-                        <span
-                          className="text-xl sm:text-2xl font-mono font-bold"
-                          style={{ color: "#FFFFFF" }}
-                        >
-                          {String(item.value).padStart(2, "0")}
-                        </span>
-                      </div>
-                      <span
-                        className="text-xs sm:text-sm font-medium"
-                        style={{ color: "#94A3B8" }}
-                      >
-                        {item.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                {isExpired ? (
-                  <p
-                    className="text-sm mt-6 font-semibold font-mono animate-pulse"
-                    style={{ color: "#DC2626" }}
-                  >
-                    &gt; PERINGATAN: BATAS WAKTU TERLAMPAUI
-                  </p>
-                ) : (
-                  <p
-                    className="text-xs mt-6 font-mono"
-                    style={{ color: "#94A3B8" }}
-                  >
-                    TARGET DEKRIPSI: {endDate} WITA
-                  </p>
-                )}
-              </motion.div>
+              <CountdownDisplay targetTime={targetTimeValue} endDate={endDate} />
             )}
 
             <motion.div

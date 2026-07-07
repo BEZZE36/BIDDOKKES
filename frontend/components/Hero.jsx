@@ -4,6 +4,7 @@
 // so the SignageStrip below (CSS animation) is never interrupted.
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { supabase } from "../lib/supabaseClient";
 
 const FALLBACK_SLIDES = [
@@ -168,14 +169,13 @@ export default function Hero() {
           }}
         >
           {/* Blurred background fill */}
-          <img
+          <Image
             src={slide.image_url}
             alt=""
+            fill
+            sizes="100vw"
+            priority={index === 0}
             style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
               objectFit: "cover",
               filter: "blur(40px)",
               opacity: 0.6,
@@ -193,14 +193,14 @@ export default function Hero() {
             }}
           />
           {/* Main image */}
-          <img
+          <Image
             src={slide.image_url}
             alt={slide.judul}
+            fill
+            sizes="100vw"
+            priority={index === 0}
             style={{
-              position: "relative",
               zIndex: 2,
-              width: "100%",
-              height: "100%",
               objectFit: "contain",
               filter: "drop-shadow(0 25px 25px rgb(0,0,0,0.5))",
             }}

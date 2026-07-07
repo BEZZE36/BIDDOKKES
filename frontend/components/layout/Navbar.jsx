@@ -135,40 +135,13 @@ export default function Header() {
             alt="Logo Biddokkes"
             className="w-10 h-10 object-contain"
           />
-          <div className="hidden sm:block">
-            {dark ? (
-              <>
-                <motion.span
-                  animate={{ 
-                    textShadow: ["0px 0px 5px rgba(217,164,65,0)", "0px 0px 20px rgba(217,164,65,1)", "0px 0px 5px rgba(217,164,65,0)"]
-                  }}
-                  transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-                  className="block text-sm font-bold"
-                  style={{ color: "var(--color-navy-900)" }}
-                >
-                  BIDDOKKES
-                </motion.span>
-                <motion.span
-                  animate={{ 
-                    textShadow: ["0px 0px 5px rgba(14,140,130,0)", "0px 0px 15px rgba(14,140,130,1)", "0px 0px 5px rgba(14,140,130,0)"]
-                  }}
-                  transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut", delay: 1.25 }}
-                  className="block text-xs"
-                  style={{ color: "var(--color-ink-500)" }}
-                >
-                  Polda Sulawesi Tengah
-                </motion.span>
-              </>
-            ) : (
-              <>
-                <span className="block text-sm font-bold" style={{ color: "var(--color-navy-900)" }}>
-                  <ShinyText text="BIDDOKKES" speed={4} />
-                </span>
-                <span className="block text-xs" style={{ color: "var(--color-ink-500)" }}>
-                  <ShinyText text="Polda Sulawesi Tengah" speed={5} />
-                </span>
-              </>
-            )}
+          <div className="flex flex-col ml-1">
+            <span className="block text-sm font-bold" style={{ color: dark ? "#FFFFFF" : "var(--color-navy-900)" }}>
+              <ShinyText text="BIDDOKKES" speed={4} />
+            </span>
+            <span className="hidden sm:block text-xs" style={{ color: dark ? "#E5E7EB" : "var(--color-ink-500)" }}>
+              <ShinyText text="Polda Sulawesi Tengah" speed={5} />
+            </span>
           </div>
         </Link>
 

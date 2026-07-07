@@ -23,10 +23,12 @@ export default function SplashScreen() {
     }
     sessionStorage.setItem("hasSeenSplash", "true");
 
-    // Jika setelah 8 detik video macet/lambat (12MB), tutup paksa saja
+    // Jika setelah batas waktu video macet/lambat, tutup paksa saja
+    // Pada mobile, waktu tunggu lebih singkat dan menggunakan gambar statis
+    const isMobile = window.innerWidth < 640;
     const safetyTimer = setTimeout(() => {
       dismiss();
-    }, 8000);
+    }, isMobile ? 2500 : 8000);
 
     return () => clearTimeout(safetyTimer);
   }, [pathname]);
@@ -77,13 +79,19 @@ export default function SplashScreen() {
           autoPlay
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
+          poster="https://storage.pusdokkes.polri.go.id/pusdokkes/logo.png"
           onEnded={dismiss}
           onError={dismiss}
-          className="w-full h-full object-contain"
+          className="hidden sm:block w-full h-full object-contain"
         >
           <source src="/0705.mp4" type="video/mp4" />
         </video>
+        {/* Gambar statis untuk mobile (lebih ringan & cepat) */}
+        <div className="sm:hidden w-full h-full flex flex-col items-center justify-center animate-pulse">
+          <img src="https://storage.pusdokkes.polri.go.id/pusdokkes/logo.png" alt="Logo Biddokkes" className="w-32 h-32 mb-4 object-contain" />
+          <p className="text-white text-xl font-bold tracking-widest font-mono">BIDDOKKES</p>
+        </div>
         {/* Penutup Watermark Gemini di Pojok Kanan Bawah */}
         <div className="absolute bottom-0 right-0 w-40 h-20 bg-black z-10"></div>
         <div className="absolute top-0 right-0 w-40 h-20 bg-black z-10"></div>
