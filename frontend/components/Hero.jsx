@@ -173,7 +173,7 @@ export default function Hero() {
             src={slide.image_url}
             alt=""
             fill
-            sizes="100vw"
+            sizes="(max-width: 768px) 50vw, 20vw"
             priority={index === 0}
             style={{
               objectFit: "cover",
@@ -197,7 +197,7 @@ export default function Hero() {
             src={slide.image_url}
             alt={slide.judul}
             fill
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, 80vw"
             priority={index === 0}
             style={{
               zIndex: 2,

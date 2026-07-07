@@ -86,7 +86,7 @@ export default function SplashScreen() {
           onError={dismiss}
           className="hidden sm:block w-full h-full object-contain"
         >
-          <source src="/0705.mp4" type="video/mp4" />
+          <source src="/0705.mp4" type="video/mp4" media="(min-width: 640px)" />
         </video>
         {/* Gambar statis untuk mobile (lebih ringan & cepat) */}
         <div className="sm:hidden w-full h-full flex flex-col items-center justify-center animate-pulse">
