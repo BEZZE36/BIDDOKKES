@@ -11,5 +11,8 @@
     "build": "npm run build --workspace=frontend",
     "start": "npm run start --workspace=frontend",
     "lint": "npm run lint --workspace=frontend"
+  },
+  "dependencies": {
+    "pg": "^8.22.0"
   }
 }
