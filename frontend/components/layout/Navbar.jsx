@@ -141,11 +141,12 @@ export default function Header() {
               className="object-contain"
             />
           </div>
-          <div className="flex flex-col ml-1">
-            <span className="block text-base font-bold tracking-wide" style={{ color: dark ? "#FFFFFF" : "var(--color-navy-900)" }}>
+          <div className="flex flex-row items-center gap-2 ml-1">
+            <span className="text-base font-bold tracking-wide" style={{ color: dark ? "#FFFFFF" : "var(--color-navy-900)" }}>
               <ShinyText text="BIDDOKKES" speed={4} />
             </span>
-            <span className="hidden sm:block text-sm" style={{ color: dark ? "#E5E7EB" : "var(--color-ink-500)" }}>
+            <span className="hidden sm:block text-sm" style={{ color: dark ? "rgba(229,231,235,0.5)" : "var(--color-line)" }}>|</span>
+            <span className="hidden sm:block text-sm font-medium" style={{ color: dark ? "#E5E7EB" : "var(--color-ink-500)" }}>
               <ShinyText text="Polda Sulawesi Tengah" speed={5} />
             </span>
           </div>
