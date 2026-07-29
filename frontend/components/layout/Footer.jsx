@@ -114,10 +114,10 @@ export default function Footer() {
                 ) : (
                   <>
                     <div className="font-bold text-sm text-white">
-                      <ShinyText text="BIDDOKKES" speed={4} />
+                      <ShinyText text="BIDDOKKES" speed={4} shineColor="rgba(217,164,65,0.9)" />
                     </div>
                     <div className="text-xs opacity-60 text-white">
-                      <ShinyText text="Polda Sulawesi Tengah" speed={5} />
+                      <ShinyText text="Polda Sulawesi Tengah" speed={5} shineColor="rgba(14,140,130,0.8)" />
                     </div>
                   </>
                 )}
