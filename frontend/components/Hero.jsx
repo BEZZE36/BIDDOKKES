@@ -11,7 +11,7 @@ const FALLBACK_SLIDES = [
   {
     id: "fallback-1",
     image_url:
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
     judul: "BIDDOKKES POLDA SULTENG",
     subtitle:
       "Bidang Kedokteran dan Kesehatan Kepolisian Daerah Sulawesi Tengah",
@@ -19,7 +19,7 @@ const FALLBACK_SLIDES = [
   {
     id: "fallback-2",
     image_url:
-      "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
     judul: "PELAYANAN PRIMA",
     subtitle:
       "Mengutamakan pengabdian kepada masyarakat dalam setiap layanan kesehatan",
@@ -27,7 +27,7 @@ const FALLBACK_SLIDES = [
   {
     id: "fallback-3",
     image_url:
-      "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
     judul: "KESAMAPTAAN PERSONEL",
     subtitle:
       "Mendukung tugas pokok dan fungsi Polri melalui kesehatan yang optimal",
@@ -37,6 +37,8 @@ const FALLBACK_SLIDES = [
 export default function Hero() {
   // slides only set once on mount (from Supabase); after that, never changes
   const [slides, setSlides] = useState(FALLBACK_SLIDES);
+  // mounted: prevent any image from rendering during SSR/hydration flash
+  const [mounted, setMounted] = useState(false);
 
   // ── refs: track active slide without causing re-renders ──────────────
   const currentRef   = useRef(0);          // active slide index
@@ -49,6 +51,9 @@ export default function Hero() {
   const slidesRef    = useRef(slides);
 
   useEffect(() => { slidesRef.current = slides; }, [slides]);
+
+  // Mark as mounted after hydration — prevents flash on reload
+  useEffect(() => { setMounted(true); }, []);
 
   // Fetch slides once
   useEffect(() => {
@@ -147,7 +152,14 @@ export default function Hero() {
         }
       }}
       className="relative w-full overflow-hidden flex items-center justify-center bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500"
-      style={{ height: "100vh", paddingTop: "64px", boxSizing: "border-box" }}
+      style={{
+        height: "100vh",
+        paddingTop: "64px",
+        boxSizing: "border-box",
+        // Fade in only after hydration to prevent flash of image on reload
+        opacity: mounted ? 1 : 0,
+        transition: "opacity 0.6s ease-in",
+      }}
     >
       {/* Slide layers — rendered once from state, controlled via refs after */}
       {slides.map((slide, index) => (
