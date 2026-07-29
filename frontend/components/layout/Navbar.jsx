@@ -128,21 +128,21 @@ export default function Header() {
         transition: "background 0.35s ease, box-shadow 0.3s ease",
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
         {/* Logo */}
-        <Link href={logoHref} className="flex items-center gap-3 no-underline">
-          <div className="relative w-14 h-14">
+        <Link href={logoHref} className="flex items-center gap-3 no-underline" style={{ minWidth: "220px" }}>
+          <div className="relative flex-shrink-0" style={{ width: "48px", height: "48px" }}>
             <Image
               src="https://storage.pusdokkes.polri.go.id/pusdokkes/logo.png"
               alt="Logo Biddokkes"
               fill
-              sizes="56px"
+              sizes="48px"
               priority={true}
               className="object-contain"
             />
           </div>
-          <div className="flex flex-col ml-2">
-            <span className="block text-lg font-bold tracking-wide" style={{ color: dark ? "#FFFFFF" : "var(--color-navy-900)" }}>
+          <div className="flex flex-col ml-1">
+            <span className="block text-base font-bold tracking-wide" style={{ color: dark ? "#FFFFFF" : "var(--color-navy-900)" }}>
               <ShinyText text="BIDDOKKES" speed={4} />
             </span>
             <span className="hidden sm:block text-sm" style={{ color: dark ? "#E5E7EB" : "var(--color-ink-500)" }}>
