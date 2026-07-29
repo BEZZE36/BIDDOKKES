@@ -95,9 +95,9 @@ export default function Footer() {
                     <motion.div
                       animate={{
                         textShadow: [
-                          "0px 0px 5px rgba(14,140,130,0)",
-                          "0px 0px 15px rgba(14,140,130,1)",
-                          "0px 0px 5px rgba(14,140,130,0)",
+                          "0px 0px 5px rgba(217,164,65,0)",
+                          "0px 0px 15px rgba(217,164,65,1)",
+                          "0px 0px 5px rgba(217,164,65,0)",
                         ],
                       }}
                       transition={{
@@ -114,10 +114,10 @@ export default function Footer() {
                 ) : (
                   <>
                     <div className="font-bold text-sm text-white">
-                      <ShinyText text="BIDDOKKES" speed={4} shineColor="rgba(217,164,65,0.9)" />
+                      <ShinyText text="BIDDOKKES" speed={4} shineColor="rgba(255,255,255,0.75)" />
                     </div>
                     <div className="text-xs opacity-60 text-white">
-                      <ShinyText text="Polda Sulawesi Tengah" speed={5} shineColor="rgba(14,140,130,0.8)" />
+                      <ShinyText text="Polda Sulawesi Tengah" speed={5} shineColor="rgba(255,255,255,0.75)" />
                     </div>
                   </>
                 )}

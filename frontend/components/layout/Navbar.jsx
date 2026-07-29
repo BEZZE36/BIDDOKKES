@@ -164,9 +164,9 @@ export default function Header() {
                   style={{ color: "#E5E7EB" }}
                   animate={{
                     textShadow: [
-                      "0px 0px 5px rgba(14,140,130,0)",
-                      "0px 0px 15px rgba(14,140,130,1)",
-                      "0px 0px 5px rgba(14,140,130,0)",
+                      "0px 0px 5px rgba(217,164,65,0)",
+                      "0px 0px 15px rgba(217,164,65,1)",
+                      "0px 0px 5px rgba(217,164,65,0)",
                     ],
                   }}
                   transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut", delay: 1.25 }}
@@ -177,11 +177,11 @@ export default function Header() {
             ) : (
               <>
                 <span className="text-base font-bold tracking-wide" style={{ color: "var(--color-navy-900)" }}>
-                  <ShinyText text="BIDDOKKES" speed={4} shineColor="rgba(217,164,65,0.9)" />
+                  <ShinyText text="BIDDOKKES" speed={4} shineColor="rgba(255,255,255,0.75)" />
                 </span>
                 <span className="hidden sm:block text-sm" style={{ color: "var(--color-line)" }}>|</span>
                 <span className="hidden sm:block text-sm font-medium" style={{ color: "var(--color-ink-500)" }}>
-                  <ShinyText text="Polda Sulawesi Tengah" speed={5} shineColor="rgba(14,140,130,0.8)" />
+                  <ShinyText text="Polda Sulawesi Tengah" speed={5} shineColor="rgba(255,255,255,0.75)" />
                 </span>
               </>
             )}
