@@ -143,11 +143,11 @@ export default function Header() {
           </div>
           <div className="flex flex-row items-center gap-2 ml-1">
             <span className="text-base font-bold tracking-wide" style={{ color: dark ? "#FFFFFF" : "var(--color-navy-900)" }}>
-              <ShinyText text="BIDDOKKES" speed={4} />
+              <ShinyText text="BIDDOKKES" speed={4} shineColor={dark ? "rgba(250,204,21,0.9)" : "rgba(255,255,255,0.75)"} />
             </span>
             <span className="hidden sm:block text-sm" style={{ color: dark ? "rgba(229,231,235,0.5)" : "var(--color-line)" }}>|</span>
             <span className="hidden sm:block text-sm font-medium" style={{ color: dark ? "#E5E7EB" : "var(--color-ink-500)" }}>
-              <ShinyText text="Polda Sulawesi Tengah" speed={5} />
+              <ShinyText text="Polda Sulawesi Tengah" speed={5} shineColor={dark ? "rgba(250,204,21,0.8)" : "rgba(255,255,255,0.75)"} />
             </span>
           </div>
         </Link>
