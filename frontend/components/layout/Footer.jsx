@@ -28,7 +28,12 @@ export default function Footer() {
     <footer
       id="site-footer"
       className="pt-12 pb-6 relative overflow-clip"
-      style={{ background: "var(--color-brand-navy)", color: "white" }}
+      style={{
+        background: dark ? "var(--color-brand-navy)" : "var(--color-paper)",
+        color: dark ? "white" : "var(--color-ink-900)",
+        borderTop: dark ? "none" : "1px solid var(--color-line)",
+        transition: "background 0.35s ease, color 0.35s ease",
+      }}
     >
       {/* Animated background orbs */}
       <motion.div
@@ -60,7 +65,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-8"
-          style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}
+          style={{ borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "var(--color-line)"}` }}
         >
           {/* Identity */}
           <ScrollReveal>
@@ -113,17 +118,17 @@ export default function Footer() {
                   </>
                 ) : (
                   <>
-                    <div className="font-bold text-sm text-white">
+                    <div className="font-bold text-sm">
                       <ShinyText text="BIDDOKKES" speed={4} shineColor="rgba(255,255,255,0.75)" />
                     </div>
-                    <div className="text-xs opacity-60 text-white">
+                    <div className="text-xs" style={{ opacity: 0.6 }}>
                       <ShinyText text="Polda Sulawesi Tengah" speed={5} shineColor="rgba(255,255,255,0.75)" />
                     </div>
                   </>
                 )}
               </div>
             </div>
-            <p className="text-sm opacity-70 leading-relaxed">
+            <p className="text-sm leading-relaxed" style={{ opacity: 0.7, color: dark ? "inherit" : "var(--color-ink-500)" }}>
               Bidang Kedokteran dan Kesehatan Polda Sulteng — melayani kesehatan
               kepolisian dan masyarakat.
             </p>
@@ -145,7 +150,7 @@ export default function Footer() {
                     href={link.href}
                     whileHover={{ x: 4, opacity: 1 }}
                     className="text-sm no-underline"
-                    style={{ color: "white", opacity: 0.85 }}
+                    style={{ color: dark ? "white" : "var(--color-ink-900)", opacity: 0.85 }}
                   >
                     {link.label}
                   </motion.a>
@@ -170,7 +175,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 whileHover={{ x: 4, opacity: 1 }}
                 className="block text-sm mb-2 no-underline"
-                style={{ color: "white", opacity: 0.85 }}
+                style={{ color: dark ? "white" : "var(--color-ink-900)", opacity: 0.85 }}
               >
                 ↗ {link.label}
               </motion.a>
@@ -201,9 +206,9 @@ export default function Footer() {
           id="footer-disclaimer"
           className="my-6 rounded-lg p-4 text-sm leading-relaxed"
           style={{
-            background: "rgba(217,164,65,0.2)",
-            border: "1px solid rgba(217,164,65,0.4)",
-            color: "#FFFFFF",
+            background: dark ? "rgba(217,164,65,0.2)" : "rgba(217,164,65,0.12)",
+            border: `1px solid rgba(217,164,65,${dark ? "0.4" : "0.5"})`,
+            color: dark ? "#FFFFFF" : "var(--color-ink-900)",
           }}
         >
           <motion.span

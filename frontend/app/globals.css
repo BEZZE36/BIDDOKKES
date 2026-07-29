@@ -105,12 +105,8 @@ html.dark .rounded-xl div.p-4 { background: #1A2332 !important; }
 html.dark .rounded-xl div.bg-white { background: #1A2332 !important; }
 html.dark .bg-white { background: #1A2332 !important; }
 
-/* Footer dark - fix text colors (footer originally uses color:white on navy bg) */
-html.dark #site-footer { background: #020A14 !important; color: #E2EAF4 !important; }
+/* Footer dark - keep text readable */
 html.dark #site-footer * { color: inherit; }
-html.dark #site-footer p, html.dark #site-footer span, html.dark #site-footer a {
-  color: rgba(226,234,244,0.85) !important;
-}
 html.dark #site-footer p[style*="gold"], html.dark #site-footer p[style*="gold-500"] {
   color: var(--color-gold-500) !important;
 }
@@ -236,6 +232,12 @@ h3 { font-size: 1.15rem; line-height: 1.35; }
 .marquee-track:hover,
 .marquee-track:active {
   animation-play-state: paused;
+}
+
+/* ── ShinyText sweep (single global definition — no per-render injection) ── */
+@keyframes shiny-sweep {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
 }
 
 /* ── Signage Chip ──────────────────────────────── */
